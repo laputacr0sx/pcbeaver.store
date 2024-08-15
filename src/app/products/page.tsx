@@ -3,8 +3,8 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import Products from "./products/ProductPage";
-import { getProducts } from "./api/products/getProducts";
+import { getProducts } from "../api/products/getProducts";
+import Products from "./ProductPage";
 
 async function HomePage() {
   const queryClient = new QueryClient();
@@ -16,8 +16,11 @@ async function HomePage() {
 
   return (
     <div className="flex h-screen justify-center">
-      <div className="w-[80%]">
-        <h1>Welcome to Computer Assemble</h1>
+      <div className="w-[80%] selection:bg-[#407AB1] selection:text-[#FFCE00]">
+        <p>所有產品</p>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <Products />
+        </HydrationBoundary>
       </div>
     </div>
   );

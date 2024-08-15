@@ -5,6 +5,27 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ir0.faroll.com",
+      },
+      {
+        protocol: "https",
+        hostname: "upload.faroll.com",
+      },
+      {
+        protocol: "https",
+        hostname: "ir0.faroll.com",
+      },
+      {
+        protocol: "https",
+        hostname: "i.imgur.com/",
+      },
+    ],
+  },
+};
 
 export default config;
