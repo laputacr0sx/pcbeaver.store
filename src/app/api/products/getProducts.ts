@@ -10,7 +10,13 @@ export type Product = {
   imageUrl: string;
   stock: number;
 };
-export async function getProducts() {
-  const res = await axios.get<Product[]>(`${env.DATABASE_URL}/public/product`);
+
+export type ProductPage = {
+  content: Product[];
+};
+export async function getProductList() {
+  const res = await axios.get<ProductPage>(
+    `${env.DATABASE_URL}/public/product`,
+  );
   return res.data;
 }

@@ -3,9 +3,9 @@ import "@/styles/globals.css";
 import { type Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 
-import MyNavBar from "@/components/navigation/MyNavBar";
 import { cn } from "@/lib/utils";
 import ReactQueryClientProvider from "./QueryClientProvider";
+import TailwindLayout from "./tailwindLayout";
 
 export const metadata: Metadata = {
   title: "Computer Assemble",
@@ -42,15 +42,15 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html>
+    <html className="bg-white dark:bg-zinc-900 lg:bg-zinc-100 dark:lg:bg-zinc-950">
       <body
         className={
-          (cn("min-h-screen w-full bg-background font-sans antialiased"),
-          fontSans.variable)
+          (cn("min-h-screen w-full font-sans antialiased"), fontSans.variable)
         }
       >
-        <MyNavBar />
-        <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
+        <ReactQueryClientProvider>
+          <TailwindLayout>{children}</TailwindLayout>
+        </ReactQueryClientProvider>
       </body>
     </html>
   );
