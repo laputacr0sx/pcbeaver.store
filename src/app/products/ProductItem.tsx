@@ -11,6 +11,7 @@ import Image from "next/image";
 import { Label } from "@/components/ui/label";
 import { type ComponentProps } from "react";
 import { type Product } from "../api/products/getProducts";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type ProductProps = ComponentProps<typeof Card> & Product;
 
@@ -62,7 +63,14 @@ export function ProductItem({ className, ...props }: ProductProps) {
       {...props}
     >
       <CardHeader className="mt-0 space-y-0 py-0">
-        <Image src={imageUrl} alt={name} width={360} height={360} />
+        <Image
+          src={imageUrl}
+          alt={name}
+          width={360}
+          height={360}
+          placeholder="blur"
+          blurDataURL="image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM00dDwBwAB8QDVOryfOwAAAABJRU5ErkJggg=="
+        />
       </CardHeader>
       <CardContent className="my-0 grid gap-2 py-0">
         <CardTitle className="text-sm">{name}</CardTitle>

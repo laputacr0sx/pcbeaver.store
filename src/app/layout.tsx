@@ -3,9 +3,10 @@ import "@/styles/globals.css";
 import { type Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 
+import LandingPageFooter from "@/components/landingPage/layout/Footer";
+import HeroHeader from "@/components/landingPage/layout/HeroHeader";
 import { cn } from "@/lib/utils";
 import ReactQueryClientProvider from "./QueryClientProvider";
-import TailwindLayout from "./tailwindLayout";
 
 export const metadata: Metadata = {
   title: "Computer Assemble",
@@ -49,7 +50,9 @@ export default function RootLayout({
         }
       >
         <ReactQueryClientProvider>
-          <TailwindLayout>{children}</TailwindLayout>
+          <HeroHeader />
+          {children}
+          <LandingPageFooter />
         </ReactQueryClientProvider>
       </body>
     </html>

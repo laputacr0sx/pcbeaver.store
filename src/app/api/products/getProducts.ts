@@ -11,11 +11,12 @@ export type Product = {
   stock: number;
 };
 
-export type ProductPage = {
+export type GetAllProductsDTO = {
   content: Product[];
 };
+
 export async function getProductList() {
-  const res = await axios.get<ProductPage>(
+  const res = await axios.get<GetAllProductsDTO>(
     `${env.DATABASE_URL}/public/product`,
   );
   return res.data;
