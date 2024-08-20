@@ -1,5 +1,4 @@
-import Link from "next/link";
-import React from "react";
+import Link from 'next/link';
 
 function AuthenticationButton() {
   return (
@@ -11,12 +10,12 @@ function AuthenticationButton() {
         Sign In
       </Link>
       <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
-      <Link
-        href="/signup"
-        className="text-sm font-medium text-gray-700 hover:text-gray-800"
-      >
-        Sign Up
-      </Link>
+      {/* <Link */}
+      {/*   href="/signup" */}
+      {/*   className="text-sm font-medium text-gray-700 hover:text-gray-800" */}
+      {/* > */}
+      {/*   Sign Up */}
+      {/* </Link> */}
     </div>
   );
 }

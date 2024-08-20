@@ -2,7 +2,7 @@
 
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useQuery } from "@tanstack/react-query";
-import { getProductList } from "../api/products/getProducts";
+import { getProductList } from "../../app/api/products/getProducts";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

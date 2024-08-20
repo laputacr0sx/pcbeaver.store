@@ -1,17 +1,15 @@
-import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Image from "next/image";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { type ComponentProps } from "react";
-import { type Product } from "../api/products/getProducts";
-import { Skeleton } from "@/components/ui/skeleton";
+import { type Product } from "../../app/api/products/getProducts";
 
 type ProductProps = ComponentProps<typeof Card> & Product;
 

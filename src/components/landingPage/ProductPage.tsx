@@ -2,7 +2,7 @@
 
 import ProductPagination from "@/components/pagination/ProductPagination";
 import { useQuery } from "@tanstack/react-query";
-import { getProductList } from "../api/products/getProducts";
+import { getProductList } from "../../app/api/products/getProducts";
 import { ProductItem } from "./ProductItem";
 
 function Products() {

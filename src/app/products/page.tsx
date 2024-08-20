@@ -3,10 +3,9 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getProductList } from "../api/products/getProducts";
-import Products from "./ProductPage";
-import LandingPage from "./LandingPage";
 import { Suspense } from "react";
+import LandingPage from "../../components/landingPage/LandingPage";
+import { getProductList } from "../api/products/getProducts";
 import LoadingProdcts from "./loading";
 
 async function HomePage() {

@@ -277,13 +277,7 @@ export default function LandingPage() {
             <div className="mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 lg:gap-x-8">
               {FAVOURITES.map((favorite) => (
                 <div key={favorite.id} className="group relative">
-                  <div className="h-96 w-full overflow-hidden rounded-lg sm:aspect-h-3 sm:aspect-w-2 group-hover:opacity-75 sm:h-auto">
-                    <img
-                      alt={favorite.imageAlt}
-                      src={favorite.imageSrc}
-                      className="h-full w-full object-cover object-center"
-                    />
-                  </div>
+                  <Skeleton className="h-96 w-full overflow-hidden rounded-lg sm:aspect-h-3 sm:aspect-w-2 group-hover:opacity-75 sm:h-auto" />
                   <h3 className="mt-4 text-base font-semibold text-gray-900">
                     <a href={favorite.href}>
                       <span className="absolute inset-0" />
@@ -302,7 +296,7 @@ export default function LandingPage() {
                 Browse all favorites
                 <span aria-hidden="true"> &rarr;</span>
               </a>
-            </div>{" "}
+            </div>
           </div>
         </section>
 
@@ -332,55 +326,19 @@ export default function LandingPage() {
                   <div className="absolute -top-32 left-1/2 -translate-x-1/2 transform sm:top-6 sm:translate-x-0">
                     <div className="ml-24 flex min-w-max space-x-6 sm:ml-3 lg:space-x-8">
                       <div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
-                        <div className="flex-shrink-0">
-                          <img
-                            alt=""
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
-                            className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                          />
-                        </div>
+                        <div className="flex-shrink-0"></div>
 
-                        <div className="mt-6 flex-shrink-0 sm:mt-0">
-                          <img
-                            alt=""
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
-                            className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                          />
-                        </div>
+                        <div className="mt-6 flex-shrink-0 sm:mt-0"></div>
                       </div>
                       <div className="flex space-x-6 sm:-mt-20 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
-                        <div className="flex-shrink-0">
-                          <img
-                            alt=""
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-01.jpg"
-                            className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                          />
-                        </div>
+                        <div className="flex-shrink-0"></div>
 
-                        <div className="mt-6 flex-shrink-0 sm:mt-0">
-                          <img
-                            alt=""
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-02.jpg"
-                            className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                          />
-                        </div>
+                        <div className="mt-6 flex-shrink-0 sm:mt-0"></div>
                       </div>
                       <div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
-                        <div className="flex-shrink-0">
-                          <img
-                            alt=""
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
-                            className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                          />
-                        </div>
+                        <div className="flex-shrink-0"></div>
 
-                        <div className="mt-6 flex-shrink-0 sm:mt-0">
-                          <img
-                            alt=""
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
-                            className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                          />
-                        </div>
+                        <div className="mt-6 flex-shrink-0 sm:mt-0"></div>
                       </div>
                     </div>
                   </div>
