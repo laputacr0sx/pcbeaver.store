@@ -1,6 +1,6 @@
 "use client";
 
-import HeroSection from "@/components/landingPage/HeroSection";
+import HeroSection from "@/components/landing/HeroSection";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FAVOURITES, HERO_NAV } from "@/lib/navigation";
 import {

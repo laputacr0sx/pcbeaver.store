@@ -1,15 +1,18 @@
 "use client";
 
-import { useSuspenseQuery } from "@tanstack/react-query";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { getProductList } from "@/app/api/products/getProducts";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import PaginationBar from "../pagination/PaginationBar";
 
 export default function LandingPage() {
+  const [page, setPage] = useState<number>(0);
+
   const { data: productPage } = useSuspenseQuery({
-    queryKey: ["products"],
-    queryFn: () => getProductList(),
+    queryKey: ["products", page],
+    queryFn: () => getProductList(page),
   });
 
   return (
@@ -45,6 +48,7 @@ export default function LandingPage() {
             </div>
           ))}
         </div>
+        <PaginationBar page={page} setPage={setPage} />
       </div>
     </div>
   );

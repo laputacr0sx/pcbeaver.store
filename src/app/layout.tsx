@@ -3,8 +3,8 @@ import "@/styles/globals.css";
 import { type Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 
-import LandingPageFooter from "@/components/landingPage/layout/Footer";
-import HeroHeader from "@/components/landingPage/layout/HeroHeader";
+import LandingPageFooter from "@/components/landing/layout/Footer";
+import HeroHeader from "@/components/landing/layout/HeroHeader";
 import { cn } from "@/lib/utils";
 import ReactQueryClientProvider from "./QueryClientProvider";
 

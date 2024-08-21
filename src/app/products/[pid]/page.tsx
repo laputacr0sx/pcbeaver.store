@@ -1,13 +1,12 @@
 "use client";
 
 import { getProductByPid } from "@/app/api/products/getProductByPid";
-import { Radio, RadioGroup } from "@headlessui/react";
-import { CheckIcon, QuestionMarkCircleIcon } from "@heroicons/react/20/solid";
+import { CheckIcon } from "@heroicons/react/20/solid";
 import { ShieldCheckIcon } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import BreadcrumbsNav from "./BreadcrumbsNav";
-import Image from "next/image";
 
 // const product = {
 //   name: "Everyday Ruck Snack",
@@ -159,7 +158,7 @@ export default function ProductDetailPage() {
                     className="mr-2 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                   />
                   <span className="text-gray-500 hover:text-gray-700">
-                    Lifetime Guarantee
+                    7-day Free Return
                   </span>
                 </a>
               </div>

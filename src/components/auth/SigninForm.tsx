@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -9,11 +9,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 const signInFormSchema = z.object({
   email: z.string().email(),
@@ -24,8 +24,8 @@ function SigninForm() {
   const signInForm = useForm<z.infer<typeof signInFormSchema>>({
     resolver: zodResolver(signInFormSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
@@ -67,12 +67,6 @@ function SigninForm() {
           )}
         />
         <Button type="submit">Submit</Button>
-        {/* <div className="mt-4 text-center text-sm"> */}
-        {/*   Don&apos;t have an account?{' '} */}
-        {/*   <Link href="#" className="underline"> */}
-        {/*     Sign up */}
-        {/*   </Link> */}
-        {/* </div> */}
       </form>
     </Form>
   );

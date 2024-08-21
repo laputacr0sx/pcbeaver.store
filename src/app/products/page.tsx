@@ -1,10 +1,10 @@
+import LandingPage from "@/components/landing/LandingPage";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
 import { Suspense } from "react";
-import LandingPage from "@/components/landingPage/LandingPage";
 import { getProductList } from "../api/products/getProducts";
 import LoadingProdcts from "./loading";
 

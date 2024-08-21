@@ -33,7 +33,6 @@ function Products() {
           />
         );
       })}
-      <ProductPagination />
     </div>
   );
 }
