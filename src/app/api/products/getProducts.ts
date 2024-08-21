@@ -1,23 +1,13 @@
-import axios from "axios";
-import { env } from "@/env.js";
+import { fetchProduct } from "@/lib/fetcher";
+import { type GetAllProductsDTO } from "@/type/product/dto/res/GetAllProductsDTO";
 
-export type Product = {
-  pid: number;
-  name: string;
-  brand: string;
-  category: string;
-  price: number;
-  imageUrl: string;
-  stock: number;
-};
+export async function getProductList(page = 0, size = 20) {
+  const res = await fetchProduct.get<GetAllProductsDTO>("", {
+    params: {
+      page,
+      size,
+    },
+  });
 
-export type GetAllProductsDTO = {
-  content: Product[];
-};
-
-export async function getProductList() {
-  const res = await axios.get<GetAllProductsDTO>(
-    `${env.DATABASE_URL}/public/product`,
-  );
   return res.data;
 }

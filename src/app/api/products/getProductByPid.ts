@@ -1,11 +1,7 @@
-import { env } from '@/env.js';
-import axios from 'axios';
-import { cache } from 'react';
-import { type Product } from './getProducts';
+import { fetchProduct } from "@/lib/fetcher";
+import { type Product } from "@/type/product/dto/res/GetAllProductsDTO";
 
-export const getProductByPid = cache(async (id: string) => {
-  const item = await axios.get<Product>(
-    `${env.DATABASE_URL}/public/product/${id}`
-  );
-  return item.data;
-});
+export const getProductByPid = async (id: string) => {
+  const res = await fetchProduct.get<Product>(`/${id}`, {});
+  return res.data;
+};

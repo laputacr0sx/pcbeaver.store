@@ -4,7 +4,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { Suspense } from "react";
-import LandingPage from "../../components/landingPage/LandingPage";
+import LandingPage from "@/components/landingPage/LandingPage";
 import { getProductList } from "../api/products/getProducts";
 import LoadingProdcts from "./loading";
 
@@ -13,7 +13,7 @@ async function HomePage() {
 
   await queryClient.prefetchQuery({
     queryKey: ["products"],
-    queryFn: getProductList,
+    queryFn: () => getProductList(),
   });
 
   return (
@@ -22,16 +22,6 @@ async function HomePage() {
         <LandingPage />
       </Suspense>
     </HydrationBoundary>
-
-    // return (
-    //   <div className="flex h-screen justify-center">
-    //     <div className="w-[80%] selection:bg-[#407AB1] selection:text-[#FFCE00]">
-    //       <p>所有產品</p>
-    //       <HydrationBoundary state={dehydrate(queryClient)}>
-    //         <Products />
-    //       </HydrationBoundary>
-    //     </div>
-    //   </div>
   );
 }
 

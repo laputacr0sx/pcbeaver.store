@@ -1,6 +1,6 @@
 "use client";
 
-import ProductPagination from "@/components/pagination/ProductPagination";
+import ProductPagination from "@/components/pagination/PaginationBar";
 import { useQuery } from "@tanstack/react-query";
 import { getProductList } from "../../app/api/products/getProducts";
 import { ProductItem } from "./ProductItem";
@@ -17,7 +17,8 @@ function Products() {
   return (
     <div className="grid min-h-screen w-full grid-cols-4 grid-rows-5 bg-muted/40">
       {data?.content?.map((product) => {
-        const { pid, name, brand, category, price, stock, imageUrl } = product;
+        const { pid, name, brand, category, price, hasStock, imageUrl } =
+          product;
 
         return (
           <ProductItem
@@ -27,7 +28,7 @@ function Products() {
             name={name}
             category={category}
             price={price}
-            stock={stock}
+            hasStock={hasStock}
             imageUrl={imageUrl}
           />
         );

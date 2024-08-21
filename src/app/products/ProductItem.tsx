@@ -15,10 +15,10 @@ type ProductProps = ComponentProps<typeof Card> & Product;
 
 function ShowStock({
   className,
-  stock,
-}: { stock: number } & ComponentProps<"div">) {
-  return stock > 0 ? (
-    <Label className={cn(className)}>有存貨於 貨倉{stock}件存貨</Label>
+  hasStock,
+}: { hasStock: boolean } & ComponentProps<"div">) {
+  return hasStock ? (
+    <Label className={cn(className)}>有存貨於 貨倉{hasStock}件存貨</Label>
   ) : (
     <Label className={cn("text-slate-600", className)}>沒有存貨</Label>
   );
@@ -72,10 +72,8 @@ export function ProductItem({ className, ...props }: ProductProps) {
       </CardHeader>
       <CardContent className="my-0 grid gap-2 py-0">
         <CardTitle className="text-sm">{name}</CardTitle>
-        {/* <CardDescription className="text-xs">{description}</CardDescription> */}
       </CardContent>
       <CardFooter>
-        {/* <Ratings size={12} rating={1.5} totalStars={5} /> */}
         <ShowPrice price={price} />
       </CardFooter>
     </Card>
