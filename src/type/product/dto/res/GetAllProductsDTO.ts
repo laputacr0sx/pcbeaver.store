@@ -1,5 +1,5 @@
-export type GetAllProductsDTO = {
-  content: Product[];
+export type PaginatedResponseDTO<T> = {
+  content: T[];
   last: boolean;
   pageNo: number;
   pageSize: number;

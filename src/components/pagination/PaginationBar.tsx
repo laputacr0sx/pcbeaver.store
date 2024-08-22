@@ -1,21 +1,34 @@
 import { getProductList } from "@/app/api/products/getProducts";
 import { cn } from "@/lib/utils";
-import { type GetAllProductsDTO } from "@/type/product/dto/res/GetAllProductsDTO";
+import {
+  type PaginatedResponseDTO,
+  type Product,
+} from "@/type/product/dto/res/GetAllProductsDTO";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { useQuery } from "@tanstack/react-query";
+import { type ClassValue } from "clsx";
 import { type Dispatch, type SetStateAction } from "react";
 import { Button } from "../ui/button";
-import PageNumberButton from "./PageNumberButton";
+import PaginationButtons from "./PaginationButtons";
+import ShowElementsDetailsLabel, {
+  sliceInfo,
+} from "./ShowElementsDetailsLabel";
 
 type PaginationBarProps = {
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
 };
 
+export const CURRENT_PAGE_CLASSNAMES: ClassValue =
+  "relative z-10 inline-flex items-center rounded-none bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
+
+export const IDLE_PAGE_CLASSNAMES: ClassValue =
+  "relative inline-flex items-center rounded-none border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50";
+
 export default function PaginationBar({ page, setPage }: PaginationBarProps) {
   const { data: pageData, isSuccess } = useQuery({
     queryKey: ["products", page],
-    queryFn: (): Promise<Omit<GetAllProductsDTO, "content">> =>
+    queryFn: (): Promise<Omit<PaginatedResponseDTO<Product>, "content">> =>
       getProductList(page),
   });
 
@@ -23,24 +36,11 @@ export default function PaginationBar({ page, setPage }: PaginationBarProps) {
 
   const { last, pageNo, pageSize, totalElements, totalPages } = pageData;
 
-  function lastThreePages() {
-    const middlePage = totalPages / 2;
-
-    if (pageNo < middlePage) {
-      return;
-    } else {
-      return;
-    }
-  }
-
-  function sliceInfo() {
-    const beginOfSlice = pageNo * pageSize + 1;
-    const endOfSlice =
-      beginOfSlice + 20 > totalElements ? totalElements : beginOfSlice + 20;
-
-    return { beginOfSlice, endOfSlice };
-  }
-  const { beginOfSlice, endOfSlice } = sliceInfo();
+  const { beginOfSlice, endOfSlice } = sliceInfo(
+    pageNo,
+    pageSize,
+    totalElements,
+  );
 
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
@@ -49,10 +49,10 @@ export default function PaginationBar({ page, setPage }: PaginationBarProps) {
           variant={"ghost"}
           onClick={() =>
             setPage((prev) => {
-              return prev == 0 ? 0 : prev - 1;
+              return prev >= 0 ? 0 : prev - 1;
             })
           }
-          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           Previous
         </Button>
@@ -65,13 +65,12 @@ export default function PaginationBar({ page, setPage }: PaginationBarProps) {
         </Button>
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-        <div>
-          <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">{beginOfSlice}</span> to{" "}
-            <span className="font-medium">{endOfSlice}</span> of{" "}
-            <span className="font-medium">{totalElements}</span> results
-          </p>
-        </div>
+        <ShowElementsDetailsLabel
+          beginOfSlice={beginOfSlice}
+          endOfSlice={endOfSlice}
+          totalElements={totalElements}
+        />
+
         <div>
           <nav
             aria-label="Pagination"
@@ -90,51 +89,14 @@ export default function PaginationBar({ page, setPage }: PaginationBarProps) {
               <span className="sr-only">Previous</span>
               <ChevronLeftIcon aria-hidden="true" className="h-5 w-5" />
             </Button>
-            {/* 
-            Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
-            Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" 
-            */}
-            <Button
-              variant={"ghost"}
-              aria-current="page"
-              className="relative z-10 inline-flex items-center rounded-none bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              {pageNo + 1}
-            </Button>
-            <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
-              ...
-            </span>
-            <Button
-              variant={"ghost"}
-              className="relative hidden items-center rounded-none px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
-            >
-              {totalPages - 2}
-            </Button>
-            <Button
-              variant={"ghost"}
-              className="relative inline-flex items-center rounded-none px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              {totalPages - 1}
-            </Button>
-            <Button
-              variant={"ghost"}
-              className="relative inline-flex items-center rounded-none px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-              onClick={() => {
-                console.log(totalPages);
-                setPage(totalPages - 1);
-              }}
-            >
-              {totalPages}
-            </Button>
-            <PageNumberButton
-              onClick={() => {
-                console.log(totalPages);
-                setPage(totalPages - 1);
-              }}
-              isCurrent={pageNo === totalPages - 1}
-            >
-              {totalPages}
-            </PageNumberButton>
+            <PaginationButtons
+              pageNo={pageNo}
+              totalPages={totalPages}
+              setPage={setPage}
+            />
+            {/* <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0"> */}
+            {/*   ... */}
+            {/* </span> */}
             <Button
               variant="ghost"
               onClick={() => setPage((prev) => (last ? prev : prev + 1))}
