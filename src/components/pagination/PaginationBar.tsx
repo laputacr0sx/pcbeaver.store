@@ -19,12 +19,6 @@ type PaginationBarProps = {
   setPage: Dispatch<SetStateAction<number>>;
 };
 
-export const CURRENT_PAGE_CLASSNAMES: ClassValue =
-  "relative z-10 inline-flex items-center rounded-none bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
-
-export const IDLE_PAGE_CLASSNAMES: ClassValue =
-  "relative inline-flex items-center rounded-none border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50";
-
 export default function PaginationBar({ page, setPage }: PaginationBarProps) {
   const { data: pageData, isSuccess } = useQuery({
     queryKey: ["products", page],
@@ -94,9 +88,6 @@ export default function PaginationBar({ page, setPage }: PaginationBarProps) {
               totalPages={totalPages}
               setPage={setPage}
             />
-            {/* <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0"> */}
-            {/*   ... */}
-            {/* </span> */}
             <Button
               variant="ghost"
               onClick={() => setPage((prev) => (last ? prev : prev + 1))}

@@ -1,15 +1,12 @@
 import { cn } from "@/lib/utils";
 import { type ComponentProps, type Dispatch, type SetStateAction } from "react";
 import { Button } from "../ui/button";
-import { CURRENT_PAGE_CLASSNAMES, IDLE_PAGE_CLASSNAMES } from "./PaginationBar";
+import PageButtonSeparator from "./PageButtonSeparator";
+export const CURRENT_PAGE_CLASSNAMES =
+  "relative z-10 inline-flex items-center rounded-none bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
 
-function PageSeparator() {
-  return (
-    <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
-      ...
-    </span>
-  );
-}
+export const IDLE_PAGE_CLASSNAMES =
+  "relative inline-flex items-center rounded-none border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50";
 
 type PageButtonProps = ComponentProps<"button"> & {
   i: number;
@@ -61,7 +58,7 @@ function PaginationButtons({
         totalPages={totalPages}
         setPage={setPage}
       />,
-      <PageSeparator />,
+      <PageButtonSeparator />,
     );
   }
   for (let i = startPage; i <= endPage; i++) {
@@ -77,7 +74,7 @@ function PaginationButtons({
 
   if (endPage <= totalPages - 3) {
     pages.push(
-      <PageSeparator />,
+      <PageButtonSeparator />,
       <PageButton
         i={totalPages - 1}
         pageNo={pageNo}

@@ -145,14 +145,6 @@ export default function LandingPage() {
                   Sign In
                 </Link>
               </div>
-              <div className="flow-root">
-                <a
-                  href="#"
-                  className="-m-2 block p-2 font-medium text-gray-900"
-                >
-                  Sign Up
-                </a>
-              </div>
             </div>
           </DialogPanel>
         </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -11,6 +12,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  getAccessToken,
+  getAuthConfig,
+  handleSignInWithEmailAndPassword,
+} from "@/lib/authService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -29,8 +35,14 @@ function SigninForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof signInFormSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof signInFormSchema>) {
+    await signIn("credentials", { callbackUrl: "/" });
+    // const isSignedIn = await handleSignInWithEmailAndPassword(
+    //   values.email,
+    //   values.password,
+    // );
+    // if (!isSignedIn) return null;
+    // return getAuthConfig();
   }
 
   return (

@@ -1,7 +1,10 @@
+import { handleSignInWithEmailAndPassword } from "@/lib/authService";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
+  type User,
 } from "next-auth";
 
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -53,7 +56,6 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       id: "email_login",
-      // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
       // `credentials` is used to generate a form on the sign in page.
       // You can specify which fields should be submitted, by adding keys to the `credentials` object.
@@ -61,24 +63,37 @@ export const authOptions: NextAuthOptions = {
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
         email: {
-          label: "email",
+          label: "E-mail",
           type: "email",
           placeholder: "hello@world.com",
         },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
+      async authorize(credentials, _req) {
+        if (!credentials?.email || !credentials?.password) {
           return null;
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
+        // Add logic here to look up the user from the credentials supplied
+        const isAuthed = await handleSignInWithEmailAndPassword(
+          credentials.email,
+          credentials.password,
+        );
+        console.log(isAuthed);
+
+        const auth = getAuth();
+
+        let authUser: User | null;
+
+        onAuthStateChanged(auth, (user) => {
+          if (!user) return null;
+
+          authUser = {
+            id: user.uid,
+            email: user.email,
+          };
+        });
+
+        return null;
       },
     }),
   ],

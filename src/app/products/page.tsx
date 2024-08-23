@@ -8,7 +8,7 @@ import { Suspense } from "react";
 import { getProductList } from "../api/products/getProducts";
 import LoadingProdcts from "./loading";
 
-async function HomePage() {
+async function ProductListPage() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
@@ -25,4 +25,4 @@ async function HomePage() {
   );
 }
 
-export default HomePage;
+export default ProductListPage;
