@@ -24,11 +24,11 @@ async function getCartItems(user: User | null | undefined) {
   return res.data;
 }
 
-export default function useFetchCartItems() {
+export default function useGetCartItems() {
   const [user] = useAuthState(auth);
 
   return useQuery({
-    queryKey: ["cart"],
+    queryKey: ["cart", user?.uid],
     queryFn: () => getCartItems(user),
   });
 }

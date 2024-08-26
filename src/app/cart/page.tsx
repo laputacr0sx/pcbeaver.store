@@ -1,6 +1,7 @@
 "use client";
 
-import useFetchCartItems from "@/hooks/cart/useFetchCartItems";
+import { Label } from "@/components/ui/label";
+import useGetCartItems from "@/hooks/cart/useGetCartItems";
 import {
   CheckIcon,
   ClockIcon,
@@ -16,13 +17,11 @@ function ShoppingCartPage() {
     isError,
     error,
     isSuccess,
-  } = useFetchCartItems();
+  } = useGetCartItems();
 
   if (!isSuccess) <div>Loading...</div>;
   if (isLoading) <div>loading...</div>;
   if (isError) <div>{error.message}</div>;
-
-  console.log(products);
 
   return (
     <main className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -46,8 +45,8 @@ function ShoppingCartPage() {
                   <Image
                     alt={product.name}
                     src={product.imageUrl}
-                    width={24}
-                    height={24}
+                    width={192}
+                    height={192}
                     className="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48"
                   />
                 </div>
@@ -57,22 +56,14 @@ function ShoppingCartPage() {
                     <div>
                       <div className="flex justify-between">
                         <h3 className="text-sm">
-                          {/* <a */}
-                          {/*   href={product} */}
-                          {/*   className="font-medium text-gray-700 hover:text-gray-800" */}
-                          {/* > */}
-                          {/*   {product.name} */}
-                          {/* </a> */}
+                          <a
+                            // href={product}
+                            className="font-medium text-gray-700 hover:text-gray-800"
+                          >
+                            {product.name}
+                          </a>
                         </h3>
                       </div>
-                      {/* <div className="mt-1 flex text-sm"> */}
-                      {/*   <p className="text-gray-500">{product.color}</p> */}
-                      {/*   {product.size ? ( */}
-                      {/*     <p className="ml-4 border-l border-gray-200 pl-4 text-gray-500"> */}
-                      {/*       {product.size} */}
-                      {/*     </p> */}
-                      {/*   ) : null} */}
-                      {/* </div> */}
                       <p className="mt-1 text-sm font-medium text-gray-900">
                         {product.price}
                       </p>
@@ -83,7 +74,7 @@ function ShoppingCartPage() {
                         htmlFor={`quantity-${productIdx}`}
                         className="sr-only"
                       >
-                        Quantity, {product.name}
+                        Quantity, {product.cartQuantity}
                       </label>
                       <select
                         id={`quantity-${productIdx}`}
@@ -209,43 +200,6 @@ function ShoppingCartPage() {
           </div>
         </section>
       </form>
-
-      {/* Related products */}
-      {/* <section aria-labelledby="related-heading" className="mt-24"> */}
-      {/*   <h2 id="related-heading" className="text-lg font-medium text-gray-900"> */}
-      {/*     You may also like&hellip; */}
-      {/*   </h2> */}
-      {/**/}
-      {/*   <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"> */}
-      {/*     {relatedProducts.map((relatedProduct) => ( */}
-      {/*       <div key={relatedProduct.id} className="group relative"> */}
-      {/*         <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-80"> */}
-      {/*           <img */}
-      {/*             alt={relatedProduct.imageAlt} */}
-      {/*             src={relatedProduct.imageSrc} */}
-      {/*             className="h-full w-full object-cover object-center lg:h-full lg:w-full" */}
-      {/*           /> */}
-      {/*         </div> */}
-      {/*         <div className="mt-4 flex justify-between"> */}
-      {/*           <div> */}
-      {/*             <h3 className="text-sm text-gray-700"> */}
-      {/*               <a href={relatedProduct.href}> */}
-      {/*                 <span aria-hidden="true" className="absolute inset-0" /> */}
-      {/*                 {relatedProduct.name} */}
-      {/*               </a> */}
-      {/*             </h3> */}
-      {/*             <p className="mt-1 text-sm text-gray-500"> */}
-      {/*               {relatedProduct.color} */}
-      {/*             </p> */}
-      {/*           </div> */}
-      {/*           <p className="text-sm font-medium text-gray-900"> */}
-      {/*             {relatedProduct.price} */}
-      {/*           </p> */}
-      {/*         </div> */}
-      {/*       </div> */}
-      {/*     ))} */}
-      {/*   </div> */}
-      {/* </section> */}
     </main>
   );
 }
