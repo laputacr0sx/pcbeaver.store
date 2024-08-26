@@ -5,8 +5,9 @@ import { Inter as FontSans } from "next/font/google";
 
 import LandingPageFooter from "@/components/landing/layout/Footer";
 import HeroHeader from "@/components/landing/layout/HeroHeader";
+import NextAuthProvider from "@/components/provider/NextAuthProvider";
 import { cn } from "@/lib/utils";
-import ReactQueryClientProvider from "./QueryClientProvider";
+import ReactQueryClientProvider from "../components/provider/QueryClientProvider";
 
 export const metadata: Metadata = {
   title: "Computer Assemble",

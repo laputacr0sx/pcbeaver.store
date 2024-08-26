@@ -1,6 +1,5 @@
 "use client";
 
-import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,14 +11,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  getAccessToken,
-  getAuthConfig,
-  handleSignInWithEmailAndPassword,
-} from "@/lib/authService";
+import { firebaseApp } from "@/lib/authService";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { getAuth } from "firebase/auth";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Separator } from "../ui/separator";
+import GoogleSignInButton from "./GoogleSignInButton";
+import { useRouter } from "next/router";
+
+const auth = getAuth(firebaseApp);
 
 const signInFormSchema = z.object({
   email: z.string().email(),
@@ -27,6 +29,9 @@ const signInFormSchema = z.object({
 });
 
 function SigninForm() {
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
   const signInForm = useForm<z.infer<typeof signInFormSchema>>({
     resolver: zodResolver(signInFormSchema),
     defaultValues: {
@@ -36,18 +41,20 @@ function SigninForm() {
   });
 
   async function onSubmit(values: z.infer<typeof signInFormSchema>) {
-    await signIn("credentials", { callbackUrl: "/" });
-    // const isSignedIn = await handleSignInWithEmailAndPassword(
-    //   values.email,
-    //   values.password,
-    // );
-    // if (!isSignedIn) return null;
-    // return getAuthConfig();
+    // const firebaseUser = await handleSignInWithCredentials({ ...values });
+    const firebaseUser = await signInWithEmailAndPassword(
+      values.email,
+      values.password,
+    );
+
+    signInForm.reset();
+
+    // console.log(firebaseUser);
   }
 
   return (
     <Form {...signInForm}>
-      <form onSubmit={signInForm.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={signInForm.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={signInForm.control}
           name="email"
@@ -78,7 +85,11 @@ function SigninForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={loading}>
+          Submit
+        </Button>
+        <Separator className="h-1 rounded-md" />
+        <GoogleSignInButton auth={auth} />
       </form>
     </Form>
   );

@@ -1,13 +1,13 @@
-import { handleSignInWithEmailAndPassword } from "@/lib/authService";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { env } from "@/env";
+import { handleSignInWithCredentials } from "@/lib/authService";
 import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
-  type User,
 } from "next-auth";
 
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -31,11 +31,18 @@ declare module "next-auth" {
 }
 
 export const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: "/signin",
+  },
   callbacks: {
     signIn: ({ user, account, profile, email, credentials }) => {
       return true;
     },
     redirect: ({ url, baseUrl }) => {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },
     session: ({ session, token }) => ({
@@ -54,13 +61,20 @@ export const authOptions: NextAuthOptions = {
     },
   },
   providers: [
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+    }),
     CredentialsProvider({
       id: "email_login",
       name: "Credentials",
-      // `credentials` is used to generate a form on the sign in page.
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
         email: {
           label: "E-mail",
@@ -71,29 +85,21 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, _req) {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          throw new Error("Unauthorized");
         }
-        // Add logic here to look up the user from the credentials supplied
-        const isAuthed = await handleSignInWithEmailAndPassword(
-          credentials.email,
-          credentials.password,
-        );
-        console.log(isAuthed);
 
-        const auth = getAuth();
+        try {
+          const firebaseUser = await handleSignInWithCredentials({
+            ...credentials,
+          });
 
-        let authUser: User | null;
-
-        onAuthStateChanged(auth, (user) => {
-          if (!user) return null;
-
-          authUser = {
-            id: user.uid,
-            email: user.email,
+          return {
+            id: firebaseUser.user.uid,
+            email: firebaseUser.user.email,
           };
-        });
-
-        return null;
+        } catch (e) {
+          throw e;
+        }
       },
     }),
   ],

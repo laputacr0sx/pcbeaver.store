@@ -11,8 +11,8 @@ export default function SignInPage() {
         <Image
           src="/PCBeaver2.png"
           alt="Image"
-          width="1920"
-          height="1080"
+          width="1024"
+          height="720"
           className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>

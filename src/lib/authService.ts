@@ -1,8 +1,9 @@
 import { initializeApp } from "firebase/app";
+
 import {
+  createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
-  GithubAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -24,40 +25,58 @@ const firebaseConfig = {
   measurementId: "G-EXV67P2D9T",
 };
 
-export const serviceInit = () => {
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  // Initialize Firebase
-  initializeApp(firebaseConfig);
+export const firebaseApp = initializeApp(firebaseConfig);
+
+type UserAuthCredentials = {
+  email: string;
+  password: string;
 };
 
-// https://firebase.google.com/docs/auth/web/start#sign_in_existing_users
-export const handleSignInWithEmailAndPassword = async (
-  email: string,
-  password: string,
-): Promise<boolean> => {
+export const handleSignUpWithCredentials = async ({
+  email,
+  password,
+}: UserAuthCredentials) => {
+  const auth = getAuth();
+  const firebaseUserCredentials = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  );
+  return firebaseUserCredentials;
+};
+
+export const handleSignInWithCredentials = async ({
+  email,
+  password,
+}: UserAuthCredentials) => {
   try {
     const auth = getAuth();
-    await signInWithEmailAndPassword(auth, email, password);
-    // Signed in
-    return true;
+
+    const firebaseUserCredentials = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
+
+    return firebaseUserCredentials;
   } catch (error) {
     console.log(error);
-    return false;
+    throw error;
   }
 };
 
 // https://firebase.google.com/docs/auth/web/google-signin#before_you_begin
-export const handleSignInWithGoogle = async (): Promise<boolean> => {
+export const handleSignInWithGoogle = async () => {
   try {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
-    await signInWithPopup(auth, provider);
+
+    const firebaseUserCredentials = await signInWithPopup(auth, provider);
     // Signed in
-    return true;
+    return firebaseUserCredentials;
   } catch (error) {
     console.log(error);
-    return false;
+    throw error;
   }
 };
 
@@ -66,6 +85,7 @@ export const handleOnAuthStateChanged = (
   callback: (user: UserData | null) => void,
 ) => {
   const auth = getAuth();
+
   onAuthStateChanged(auth, (user) => {
     let loginUser: UserData | null;
     if (user) {
@@ -83,7 +103,7 @@ export const handleOnAuthStateChanged = (
   });
 };
 
-export const getAccessToken = (): Promise<string> | null => {
+export const getAccessToken = () => {
   const currentUser = getAuth().currentUser;
   if (!currentUser) {
     return null;
