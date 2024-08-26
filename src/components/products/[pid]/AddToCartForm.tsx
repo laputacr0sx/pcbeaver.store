@@ -1,5 +1,6 @@
 "use client";
 
+import { getProductByPid } from "@/app/api/products/getProductByPid";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,6 +13,8 @@ import {
 import { usePutItemToCart } from "@/hooks/cart/usePutItemToCart";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -19,11 +22,9 @@ const addToCartFormSchema = z.object({
   quantity: z.number(),
 });
 
-type AddtoCartFormProps = {
-  pid: number;
-};
+function AddtoCartForm() {
+  const { pid } = useParams<{ pid: string }>();
 
-function AddtoCartForm({ pid }: AddtoCartFormProps) {
   const addToCartForm = useForm<z.infer<typeof addToCartFormSchema>>({
     resolver: zodResolver(addToCartFormSchema),
     defaultValues: {
@@ -32,6 +33,16 @@ function AddtoCartForm({ pid }: AddtoCartFormProps) {
   });
 
   const { mutate } = usePutItemToCart(pid, addToCartForm.getValues("quantity"));
+
+  const {
+    data: product,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["product"],
+    queryFn: () => getProductByPid(pid),
+  });
 
   async function onSubmit(data: z.infer<typeof addToCartFormSchema>) {
     event?.preventDefault();

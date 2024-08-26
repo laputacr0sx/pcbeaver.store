@@ -1,20 +1,22 @@
 "use client";
 
 import { getProductByPid } from "@/app/api/products/getProductByPid";
-import { CheckIcon } from "@heroicons/react/20/solid";
-import { ShieldCheckIcon } from "@heroicons/react/24/outline";
+import AddToCartForm from "@/components/products/[pid]/AddToCartForm";
+import ProductHasStockLabel from "@/components/products/[pid]/ProductHasStockLabel";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import BreadcrumbsNav from "./BreadcrumbsNav";
-import AddToCartForm from "@/components/product/AddToCartForm";
+import BreadcrumbsNav from "../../../components/products/[pid]/BreadcrumbsNav";
+import { Skeleton } from "@/components/ui/skeleton";
+import { warn } from "console";
+import LoadingProduct from "../../../components/products/[pid]/LoadingProduct";
 
 export default function ProductDetailPage() {
   const params = useParams<{ pid: string }>();
 
   const {
     data: product,
-    isLoading,
+    isSuccess,
     isError,
     error,
   } = useQuery({
@@ -22,8 +24,11 @@ export default function ProductDetailPage() {
     queryFn: () => getProductByPid(params.pid),
   });
 
-  if (isLoading || !product) return <div>Loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
+
+  if (!isSuccess) return <LoadingProduct />;
+
+  console.log(product);
 
   return (
     <div className="bg-white">
@@ -44,19 +49,10 @@ export default function ProductDetailPage() {
 
             <div className="flex items-center">
               <p className="text-lg text-gray-900 sm:text-xl">
-                {product.price}
+                HKD$ {product.price}
               </p>
             </div>
-
-            <div className="mt-6 flex items-center">
-              <CheckIcon
-                aria-hidden="true"
-                className="h-5 w-5 flex-shrink-0 text-green-500"
-              />
-              <p className="ml-2 text-sm text-gray-500">
-                In stock and ready to ship
-              </p>
-            </div>
+            <ProductHasStockLabel stock={product.stock} />
           </section>
         </div>
 
@@ -79,7 +75,7 @@ export default function ProductDetailPage() {
             <h2 id="options-heading" className="sr-only">
               Add To Cart
             </h2>
-            <AddToCartForm pid={product.pid} />
+            <AddToCartForm />
           </section>
         </div>
       </div>

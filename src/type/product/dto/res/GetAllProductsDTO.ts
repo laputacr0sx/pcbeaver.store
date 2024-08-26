@@ -10,11 +10,11 @@ export type PaginatedResponseDTO<T> = {
 export type Product = {
   brand: Brand;
   category: Category;
-  hasStock: boolean;
   imageUrl: string;
   name: string;
   pid: number;
   price: number;
+  stock: number;
 };
 
 export type Brand =

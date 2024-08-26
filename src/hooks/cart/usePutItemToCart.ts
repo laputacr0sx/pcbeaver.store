@@ -8,7 +8,7 @@ const auth = getAuth(firebaseApp);
 
 async function putItemToCart(
   user: User | null | undefined,
-  pid: number,
+  pid: number | string,
   quantity: number,
 ) {
   const res = await fetchCart.put<{ result: string }>(
@@ -23,7 +23,7 @@ async function putItemToCart(
   return res.data;
 }
 
-export function usePutItemToCart(pid: number, quantity: number) {
+export function usePutItemToCart(pid: number | string, quantity: number) {
   const [user] = useAuthState(auth);
 
   return useMutation({
