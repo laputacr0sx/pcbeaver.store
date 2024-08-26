@@ -2,14 +2,12 @@
 
 import { getProductByPid } from "@/app/api/products/getProductByPid";
 import AddToCartForm from "@/components/products/[pid]/AddToCartForm";
+import BreadcrumbsNav from "@/components/products/[pid]/BreadcrumbsNav";
+import LoadingProduct from "@/components/products/[pid]/LoadingProduct";
 import ProductHasStockLabel from "@/components/products/[pid]/ProductHasStockLabel";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import BreadcrumbsNav from "../../../components/products/[pid]/BreadcrumbsNav";
-import { Skeleton } from "@/components/ui/skeleton";
-import { warn } from "console";
-import LoadingProduct from "../../../components/products/[pid]/LoadingProduct";
 
 export default function ProductDetailPage() {
   const params = useParams<{ pid: string }>();

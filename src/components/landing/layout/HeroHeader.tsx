@@ -7,14 +7,13 @@ import {
   PopoverGroup,
   PopoverPanel,
 } from "@headlessui/react";
-import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/16/solid";
-import { ShoppingBagIcon } from "lucide-react";
+import { Bars3Icon } from "@heroicons/react/16/solid";
 import Image from "next/image";
 import Link from "next/link";
 
 import { useState } from "react";
-import ShoppingCart from "../Cart";
 import AuthenticationButton from "../AuthenticationButton";
+import ShoppingCart from "../Cart";
 
 function HeroHeader() {
   const [open, setOpen] = useState(false);

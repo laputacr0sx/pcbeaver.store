@@ -1,6 +1,5 @@
 "use client";
 
-import { getProductByPid } from "@/app/api/products/getProductByPid";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,23 +12,18 @@ import {
 import { usePutItemToCart } from "@/hooks/cart/usePutItemToCart";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { z } from "zod";
 
 const addToCartFormSchema = z.object({
   quantity: z.number(),
 });
 
-const validateQuantity = (quantity: number) => {
-  return true;
+type AddtoCartFormProps = {
+  pid: number;
 };
 
-function AddtoCartForm() {
-  const { pid } = useParams<{ pid: string }>();
-
+function AddtoCartForm({ pid }: AddtoCartFormProps) {
   const addToCartForm = useForm<z.infer<typeof addToCartFormSchema>>({
     resolver: zodResolver(addToCartFormSchema),
     defaultValues: {
@@ -42,21 +36,9 @@ function AddtoCartForm() {
     addToCartForm.getValues("quantity"),
   );
 
-  const {
-    data: product,
-    isSuccess,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["product"],
-    queryFn: () => getProductByPid(pid),
-  });
-
-  async function onSubmit(data: z.infer<typeof addToCartFormSchema>) {
+  async function onSubmit(values: z.infer<typeof addToCartFormSchema>) {
     event?.preventDefault();
-    mutate(undefined, {
-      onSuccess: () => toast.success("Successfully added to cart!"),
-    });
+    mutate();
 
     addToCartForm.reset();
   }
@@ -79,7 +61,7 @@ function AddtoCartForm() {
                     type="button"
                     className="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     onClick={() => {
-                      addToCartForm.setValue("quantity", field.value--);
+                      return field.value--;
                     }}
                   >
                     <MinusIcon className="h-5 w-5 flex-shrink-0" />
@@ -111,7 +93,7 @@ function AddtoCartForm() {
                     type="button"
                     className="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     onClick={() => {
-                      addToCartForm.setValue("quantity", field.value++);
+                      return field.value++;
                     }}
                   >
                     <PlusIcon className="h-5 w-5 flex-shrink-0" />

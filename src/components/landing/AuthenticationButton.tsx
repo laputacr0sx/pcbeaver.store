@@ -30,7 +30,7 @@ function AuthenticationButton() {
     const emailName =
       user.email?.split("@")[0]?.substring(0, 2).toUpperCase() ?? "GG";
 
-    console.log(user.metadata);
+    console.table(user.metadata);
 
     return (
       <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
