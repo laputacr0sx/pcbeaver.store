@@ -6,8 +6,10 @@ import { Inter as FontSans } from "next/font/google";
 import LandingPageFooter from "@/components/landing/layout/Footer";
 import HeroHeader from "@/components/landing/layout/HeroHeader";
 import { cn } from "@/lib/utils";
-import ReactQueryClientProvider from "../components/provider/QueryClientProvider";
 import { Toaster } from "react-hot-toast";
+import ReactQueryClientProvider from "../components/provider/QueryClientProvider";
+import { getAuth } from "firebase/auth";
+import { firebaseApp } from "@/lib/authService";
 
 export const metadata: Metadata = {
   title: "Computer Assemble",

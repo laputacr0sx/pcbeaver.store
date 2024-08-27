@@ -27,7 +27,6 @@ function PageButton({ i, pageNo, totalPages, setPage }: PageButtonProps) {
       className={cn(
         pageNo != i ? IDLE_PAGE_CLASSNAMES : CURRENT_PAGE_CLASSNAMES,
       )}
-      key={i}
       onClick={() => handlePageChange(i)}
     >
       {i + 1}
@@ -58,9 +57,10 @@ function PaginationButtons({
         totalPages={totalPages}
         setPage={setPage}
       />,
-      <PageButtonSeparator />,
+      <PageButtonSeparator key={"start-separator"} />,
     );
   }
+
   for (let i = startPage; i <= endPage; i++) {
     pages.push(
       <PageButton
@@ -74,7 +74,7 @@ function PaginationButtons({
 
   if (endPage <= totalPages - 3) {
     pages.push(
-      <PageButtonSeparator />,
+      <PageButtonSeparator key={"end-separator"} />,
       <PageButton
         i={totalPages - 1}
         pageNo={pageNo}

@@ -7,13 +7,13 @@ export default function SignInPage() {
       <div className="flex items-center justify-center py-12">
         <SigninForm />
       </div>
-      <div className="hidden bg-muted lg:block">
+      <div className="hidden bg-transparent lg:block">
         <Image
           src="/PCBeaver2.png"
           alt="Image"
           width="1024"
           height="720"
-          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          className="h-full w-full object-contain dark:brightness-[0.2] dark:grayscale"
         />
       </div>
     </div>

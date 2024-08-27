@@ -5,10 +5,24 @@ import AddToCartForm from "@/components/products/[pid]/AddToCartForm";
 import BreadcrumbsNav from "@/components/products/[pid]/BreadcrumbsNav";
 import LoadingProduct from "@/components/products/[pid]/LoadingProduct";
 import ProductHasStockLabel from "@/components/products/[pid]/ProductHasStockLabel";
+import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import { type ComponentProps } from "react";
 
+function PriceTag({ children, className }: ComponentProps<"div">) {
+  return (
+    <div className="flex items-start font-sans">
+      <p className={cn("px-2 py-1", className)}>
+        <span className="inline-flex w-auto max-w-full text-[2.25rem] font-bold tracking-[-0.0042em] text-[#111]">
+          <span className="mr-[0.1rem] mt-[0.15em] inline-flex text-sm">$</span>
+          {children}
+        </span>
+      </p>
+    </div>
+  );
+}
 export default function ProductDetailPage() {
   const params = useParams<{ pid: string }>();
 

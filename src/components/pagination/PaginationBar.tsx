@@ -6,7 +6,6 @@ import {
 } from "@/type/product/dto/res/GetAllProductsDTO";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { useQuery } from "@tanstack/react-query";
-import { type ClassValue } from "clsx";
 import { type Dispatch, type SetStateAction } from "react";
 import { Button } from "../ui/button";
 import PaginationButtons from "./PaginationButtons";
@@ -71,6 +70,7 @@ export default function PaginationBar({ page, setPage }: PaginationBarProps) {
             className="isolate inline-flex -space-x-px rounded-md shadow-sm"
           >
             <Button
+              key={"Prev-Button"}
               variant={"ghost"}
               disabled={pageNo == 0}
               onClick={() =>
@@ -89,6 +89,7 @@ export default function PaginationBar({ page, setPage }: PaginationBarProps) {
               setPage={setPage}
             />
             <Button
+              key={"Next-Button"}
               variant="ghost"
               onClick={() => setPage((prev) => (last ? prev : prev + 1))}
               className={cn(

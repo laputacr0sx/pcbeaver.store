@@ -13,7 +13,7 @@ import { type ComponentProps } from "react";
 
 type ProductProps = ComponentProps<typeof Card> & Product;
 
-function ShowStock({
+export function ShowStock({
   className,
   hasStock,
 }: { hasStock: boolean } & ComponentProps<"div">) {
@@ -24,7 +24,7 @@ function ShowStock({
   );
 }
 
-function PriceTag({ children, className }: ComponentProps<"div">) {
+export function PriceTag({ children, className }: ComponentProps<"div">) {
   return (
     <div className="flex items-start font-sans">
       <p className={cn("px-2 py-1", className)}>
@@ -37,7 +37,7 @@ function PriceTag({ children, className }: ComponentProps<"div">) {
   );
 }
 
-function ShowPrice({ price }: { price: number }) {
+export function ShowPrice({ price }: { price: number }) {
   if (price <= 100) {
     return (
       <PriceTag className="bg-[#fd0] shadow-[3px_3px_#e00751]">
@@ -50,7 +50,7 @@ function ShowPrice({ price }: { price: number }) {
 }
 
 export function ProductItem({ className, ...props }: ProductProps) {
-  const { name, brand, category, price, imageUrl, hasStock } = props;
+  const { name, brand, category, price, imageUrl } = props;
 
   return (
     <Card

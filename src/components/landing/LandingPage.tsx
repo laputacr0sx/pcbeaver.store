@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import PaginationBar from "../pagination/PaginationBar";
+import { ShowPrice } from "@/app/products/ProductItem";
 
 export default function LandingPage() {
   const [page, setPage] = useState<number>(0);
@@ -29,9 +30,9 @@ export default function LandingPage() {
                 <Image
                   alt={product.name}
                   src={product.imageUrl}
-                  // className="h-full w-full object-cover object-center"
-                  width={200}
-                  height={200}
+                  className="object-contain"
+                  width={192}
+                  height={192}
                 />
               </div>
               <div className="pb-4 pt-10 text-center">
@@ -41,9 +42,8 @@ export default function LandingPage() {
                     {product.name}
                   </Link>
                 </h3>
-                <p className="mt-4 text-base font-medium text-gray-900">
-                  {product.price}
-                </p>
+
+                <ShowPrice price={product.price} />
               </div>
             </div>
           ))}

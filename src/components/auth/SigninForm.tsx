@@ -19,9 +19,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Separator } from "../ui/separator";
 import GoogleSignInButton from "./GoogleSignInButton";
-import { useRouter } from "next/router";
 
-const auth = getAuth(firebaseApp);
+export const auth = getAuth(firebaseApp);
 
 const signInFormSchema = z.object({
   email: z.string().email(),
@@ -42,14 +41,9 @@ function SigninForm() {
 
   async function onSubmit(values: z.infer<typeof signInFormSchema>) {
     // const firebaseUser = await handleSignInWithCredentials({ ...values });
-    const firebaseUser = await signInWithEmailAndPassword(
-      values.email,
-      values.password,
-    );
+    await signInWithEmailAndPassword(values.email, values.password);
 
     signInForm.reset();
-
-    // console.log(firebaseUser);
   }
 
   return (
@@ -64,7 +58,6 @@ function SigninForm() {
               <FormControl>
                 <Input placeholder="hello@world.com" {...field} />
               </FormControl>
-              <FormDescription>Input your login email.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -78,9 +71,6 @@ function SigninForm() {
               <FormControl>
                 <Input type="password" {...field} />
               </FormControl>
-              <FormDescription>
-                Password must be at least 8 characters long.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -88,7 +78,7 @@ function SigninForm() {
         <Button type="submit" disabled={loading}>
           Submit
         </Button>
-        <Separator className="h-1 rounded-md" />
+        <Separator className="my-4 h-1 rounded-md py-1" />
         <GoogleSignInButton auth={auth} />
       </form>
     </Form>
