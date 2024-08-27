@@ -53,6 +53,8 @@ function AddtoCartForm() {
   });
 
   async function onSubmit(data: z.infer<typeof addToCartFormSchema>) {
+    console.log("From obSubmit data", data.quantity);
+
     event?.preventDefault();
     mutate(undefined, {
       onSuccess: () => toast.success("Successfully added to cart!"),

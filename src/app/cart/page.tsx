@@ -1,6 +1,5 @@
 "use client";
 
-import { Label } from "@/components/ui/label";
 import useGetCartItems from "@/hooks/cart/useGetCartItems";
 import {
   CheckIcon,
@@ -19,10 +18,11 @@ function ShoppingCartPage() {
     isSuccess,
   } = useGetCartItems();
 
+  if (isLoading) return <div>I am Loading...</div>;
   if (isError) return <div>{error.message}</div>;
   if (!isSuccess) return <div>Loading...</div>;
 
-  console.table(cartItems);
+  // console.table(cartItems);
 
   const SHIPPING = 40.0;
   const total = cartItems.reduce((prev, curr) => {

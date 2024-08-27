@@ -1,11 +1,12 @@
-import { getProductList } from "@/app/api/products/getProducts";
+"use client";
+
+import { useGetAllProducts } from "@/hooks/product/useGetAllProducts";
 import { cn } from "@/lib/utils";
 import {
   type PaginatedResponseDTO,
   type Product,
 } from "@/type/product/dto/res/GetAllProductsDTO";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import { useQuery } from "@tanstack/react-query";
 import { type Dispatch, type SetStateAction } from "react";
 import { Button } from "../ui/button";
 import PaginationButtons from "./PaginationButtons";
@@ -19,15 +20,12 @@ type PaginationBarProps = {
 };
 
 export default function PaginationBar({ page, setPage }: PaginationBarProps) {
-  const { data: pageData, isSuccess } = useQuery({
-    queryKey: ["products", page],
-    queryFn: (): Promise<Omit<PaginatedResponseDTO<Product>, "content">> =>
-      getProductList(page),
-  });
+  const { data: pageData, isSuccess } = useGetAllProducts(page);
 
   if (!isSuccess) return <p>Loading...</p>;
 
-  const { last, pageNo, pageSize, totalElements, totalPages } = pageData;
+  const { last, pageNo, pageSize, totalElements, totalPages } =
+    pageData as Omit<PaginatedResponseDTO<Product>, "content">;
 
   const { beginOfSlice, endOfSlice } = sliceInfo(
     pageNo,

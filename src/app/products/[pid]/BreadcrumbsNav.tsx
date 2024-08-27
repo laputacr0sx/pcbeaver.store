@@ -1,4 +1,5 @@
 import { type Product } from "@/type/product/dto/res/GetAllProductsDTO";
+import React from "react";
 
 function BreadcrumbsNav({ product }: { product: Product }) {
   return (

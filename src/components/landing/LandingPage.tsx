@@ -1,8 +1,7 @@
 "use client";
 
-import { getProductList } from "@/app/api/products/getProducts";
 import { ShowPrice, ShowStock } from "@/app/products/ProductItem";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useGetAllProducts } from "@/hooks/product/useGetAllProducts";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -11,10 +10,7 @@ import PaginationBar from "../pagination/PaginationBar";
 export default function LandingPage() {
   const [page, setPage] = useState<number>(0);
 
-  const { data: productPage } = useSuspenseQuery({
-    queryKey: ["products", page],
-    queryFn: () => getProductList(page),
-  });
+  const { data: productPage } = useGetAllProducts(page);
 
   return (
     <div className="bg-white">

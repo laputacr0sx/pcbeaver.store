@@ -11,6 +11,8 @@ async function putItemToCart(
   pid: number | string,
   quantity: number,
 ) {
+  console.log("From putItemToCart", user, pid, quantity);
+
   const res = await fetchCart.put<{ result: string }>(
     `/${pid}/${quantity}`,
     null,

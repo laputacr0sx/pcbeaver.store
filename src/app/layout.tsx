@@ -8,8 +8,6 @@ import HeroHeader from "@/components/landing/layout/HeroHeader";
 import { cn } from "@/lib/utils";
 import { Toaster } from "react-hot-toast";
 import ReactQueryClientProvider from "../components/provider/QueryClientProvider";
-import { getAuth } from "firebase/auth";
-import { firebaseApp } from "@/lib/authService";
 
 export const metadata: Metadata = {
   title: "Computer Assemble",
