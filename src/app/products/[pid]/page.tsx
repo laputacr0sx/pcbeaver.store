@@ -40,8 +40,6 @@ export default function ProductDetailPage() {
 
   if (!isSuccess) return <LoadingProduct />;
 
-  console.log(product);
-
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
@@ -54,16 +52,14 @@ export default function ProductDetailPage() {
             </h1>
           </div>
 
+          {/* Product Market Details */}
           <section aria-labelledby="information-heading" className="mt-4">
             <h2 id="information-heading" className="sr-only">
               Product information
             </h2>
-
-            <div className="flex items-center">
-              <p className="text-lg text-gray-900 sm:text-xl">
-                HKD$ {product.price}
-              </p>
-            </div>
+            <PriceTag className="font-sans">
+              {product.price.toLocaleString()}
+            </PriceTag>
             <ProductHasStockLabel stock={product.stock} />
           </section>
         </div>

@@ -1,12 +1,12 @@
 "use client";
 
 import { getProductList } from "@/app/api/products/getProducts";
+import { ShowPrice, ShowStock } from "@/app/products/ProductItem";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import PaginationBar from "../pagination/PaginationBar";
-import { ShowPrice } from "@/app/products/ProductItem";
 
 export default function LandingPage() {
   const [page, setPage] = useState<number>(0);
@@ -42,8 +42,8 @@ export default function LandingPage() {
                     {product.name}
                   </Link>
                 </h3>
-
                 <ShowPrice price={product.price} />
+                <ShowStock hasStock={product.hasStock} />
               </div>
             </div>
           ))}
