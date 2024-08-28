@@ -20,7 +20,7 @@ export async function getAllProducts(page = 0, size = 20) {
 
 export function useGetAllProducts(page = 0, size = 20) {
   return useQuery({
-    queryKey: ["product-list", `hashed-${page}`],
+    queryKey: ["product-list"],
     queryFn: () => getAllProducts(page, size),
   });
 }

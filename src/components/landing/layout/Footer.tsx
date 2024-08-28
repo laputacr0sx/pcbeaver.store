@@ -1,3 +1,5 @@
+"use client";
+
 import { FOOT_NAV } from "@/lib/navigation";
 import React from "react";
 

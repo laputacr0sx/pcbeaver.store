@@ -1,3 +1,5 @@
+"use client";
+
 import { type Product } from "@/type/product/dto/res/GetAllProductsDTO";
 
 function BreadcrumbsNav({ product }: { product: Product }) {

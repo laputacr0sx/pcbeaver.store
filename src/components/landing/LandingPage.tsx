@@ -6,18 +6,40 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import PaginationBar from "../pagination/PaginationBar";
+import { Separator } from "../ui/separator";
 
 export default function LandingPage() {
   const [page, setPage] = useState<number>(0);
 
-  const { data: productPage } = useGetAllProducts(page);
+  const {
+    data: allProducts,
+    isLoading,
+    isSuccess,
+    error,
+    isError,
+  } = useGetAllProducts(page);
+
+  if (isLoading)
+    return (
+      <div className="bg-white">
+        <div className="mx-auto max-w-7xl overflow-hidden sm:px-6 lg:px-8">
+          <h2 className="sr-only">All Products</h2>
+          <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
+            {new Array(20).map((_, i) => {
+              return <div key={i}>hello</div>;
+            })}
+          </div>
+          <Separator className="h-4 w-40" />
+        </div>
+      </div>
+    );
 
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl overflow-hidden sm:px-6 lg:px-8">
         <h2 className="sr-only">All Products</h2>
         <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
-          {productPage?.content?.map((product) => (
+          {allProducts?.content?.map((product) => (
             <div
               key={product.pid}
               className="group relative border-b border-r border-gray-200 p-4 sm:p-6"

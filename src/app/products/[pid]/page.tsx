@@ -32,7 +32,7 @@ export default function ProductDetailPage() {
     isError,
     error,
   } = useQuery({
-    queryKey: ["product"],
+    queryKey: ["product", params.pid],
     queryFn: () => getProductByPid(params.pid),
   });
 

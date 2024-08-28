@@ -1,3 +1,5 @@
+"user client";
+
 import { GoogleLoginButton } from "react-social-login-buttons";
 
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";

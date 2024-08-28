@@ -6,6 +6,7 @@ import { Inter as FontSans } from "next/font/google";
 import LandingPageFooter from "@/components/landing/layout/Footer";
 import HeroHeader from "@/components/landing/layout/HeroHeader";
 import { cn } from "@/lib/utils";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import ReactQueryClientProvider from "../components/provider/QueryClientProvider";
 
@@ -55,6 +56,7 @@ export default function RootLayout({
           <HeroHeader />
           {children}
           <LandingPageFooter />
+          <ReactQueryDevtools />
         </ReactQueryClientProvider>
       </body>
     </html>

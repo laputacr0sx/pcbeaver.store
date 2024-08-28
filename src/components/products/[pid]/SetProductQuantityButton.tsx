@@ -1,3 +1,4 @@
+"use client";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 
 function SetProductQuantityButton() {

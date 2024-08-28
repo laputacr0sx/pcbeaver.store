@@ -1,3 +1,5 @@
+"user client";
+
 import useGetCartItems from "@/hooks/cart/useGetCartItems";
 import { ShoppingBagIcon } from "lucide-react";
 import Link from "next/link";

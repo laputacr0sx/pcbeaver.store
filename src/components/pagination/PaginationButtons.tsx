@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { type ComponentProps, type Dispatch, type SetStateAction } from "react";
 import { Button } from "../ui/button";
