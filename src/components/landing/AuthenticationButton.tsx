@@ -52,8 +52,8 @@ function AuthenticationButton() {
   return (
     <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
       <Link
-        onClick={() => signIn()}
-        href="#"
+        // onClick={() => signIn()}
+        href="/signin"
         className="text-sm font-medium text-gray-700 hover:text-gray-800"
       >
         <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-500">

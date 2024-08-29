@@ -24,7 +24,7 @@ export const auth = getAuth(firebaseApp);
 
 const signInFormSchema = z.object({
   email: z.string().email(),
-  password: z.string(),
+  password: z.string().min(8),
 });
 
 function SigninForm() {

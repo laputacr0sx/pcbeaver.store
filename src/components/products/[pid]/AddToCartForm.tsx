@@ -1,6 +1,5 @@
 "use client";
 
-import { getProductByPid } from "@/app/api/products/getProductByPid";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -11,6 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { usePutItemToCart } from "@/hooks/cart/usePutItemToCart";
+import { useGetProductByPid } from "@/hooks/product/useGetProductByPid";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
@@ -42,15 +42,7 @@ function AddtoCartForm() {
     addToCartForm.getValues("quantity"),
   );
 
-  const {
-    data: product,
-    isSuccess,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["product"],
-    queryFn: () => getProductByPid(pid),
-  });
+  const { data: product, isSuccess, isError, error } = useGetProductByPid(pid);
 
   async function onSubmit(data: z.infer<typeof addToCartFormSchema>) {
     console.log("From obSubmit data", data.quantity);

@@ -1,12 +1,12 @@
 "use client";
 
-import { ShowPrice, ShowStock } from "@/app/products/ProductItem";
 import { useGetAllProducts } from "@/hooks/product/useGetAllProducts";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import PaginationBar from "../pagination/PaginationBar";
 import { Separator } from "../ui/separator";
+import { ShowPrice, ShowStock } from "./ProductItem";
 
 export default function LandingPage() {
   const [page, setPage] = useState<number>(0);

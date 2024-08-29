@@ -1,12 +1,11 @@
 "use client";
 
-import { getProductByPid } from "@/app/api/products/getProductByPid";
 import AddToCartForm from "@/components/products/[pid]/AddToCartForm";
 import BreadcrumbsNav from "@/components/products/[pid]/BreadcrumbsNav";
 import LoadingProduct from "@/components/products/[pid]/LoadingProduct";
 import ProductHasStockLabel from "@/components/products/[pid]/ProductHasStockLabel";
+import { useGetProductByPid } from "@/hooks/product/useGetProductByPid";
 import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { type ComponentProps } from "react";
@@ -24,17 +23,9 @@ function PriceTag({ children, className }: ComponentProps<"div">) {
   );
 }
 export default function ProductDetailPage() {
-  const params = useParams<{ pid: string }>();
+  const { pid } = useParams<{ pid: string }>();
 
-  const {
-    data: product,
-    isSuccess,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["product", params.pid],
-    queryFn: () => getProductByPid(params.pid),
-  });
+  const { data: product, isSuccess, isError, error } = useGetProductByPid(pid);
 
   if (isError) return <div>Error: {error.message}</div>;
 
