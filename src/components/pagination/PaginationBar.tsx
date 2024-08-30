@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import {
   type PaginatedResponseDTO,
   type Product,
-} from "@/type/product/dto/res/GetAllProductsDTO";
+} from "@/type/product/dto/res/GetAllProductsDTO.type";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { type Dispatch, type SetStateAction } from "react";
 import { Button } from "../ui/button";

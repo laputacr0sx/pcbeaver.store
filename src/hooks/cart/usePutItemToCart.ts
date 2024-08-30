@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { getAuth, type User } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-const auth = getAuth(firebaseApp);
+export const auth = getAuth(firebaseApp);
 
 async function putItemToCart(
   user: User | null | undefined,

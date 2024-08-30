@@ -1,6 +1,6 @@
 "use client";
 
-import { type Product } from "@/type/product/dto/res/GetAllProductsDTO";
+import { type Product } from "@/type/product/dto/res/GetAllProductsDTO.type";
 
 function BreadcrumbsNav({ product }: { product: Product }) {
   return (

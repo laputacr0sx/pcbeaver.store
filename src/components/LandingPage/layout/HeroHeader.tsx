@@ -12,8 +12,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useState } from "react";
-import AuthenticationButton from "../AuthenticationButton";
 import ShoppingCart from "../Cart";
+import AuthenticationButton from "@/components/LandingPage/SignInButton";
+import SignInButton from "@/components/LandingPage/SignInButton";
 
 function HeroHeader() {
   const [open, setOpen] = useState(false);
@@ -167,7 +168,7 @@ function HeroHeader() {
               {/* </div> */}
 
               {/* Authentication Buttons  */}
-              <AuthenticationButton />
+              <SignInButton />
 
               {/* Cart */}
               <ShoppingCart />

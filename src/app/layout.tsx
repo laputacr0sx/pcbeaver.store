@@ -3,12 +3,12 @@ import "@/styles/globals.css";
 import { type Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 
-import LandingPageFooter from "@/components/landing/layout/Footer";
-import HeroHeader from "@/components/landing/layout/HeroHeader";
+import LandingPageFooter from "@/components/LandingPage/layout/Footer";
+import HeroHeader from "@/components/LandingPage/layout/HeroHeader";
 import { cn } from "@/lib/utils";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
-import ReactQueryClientProvider from "../components/provider/QueryClientProvider";
+import ReactQueryClientProvider from "@/provider/QueryClientProvider";
 
 export const metadata: Metadata = {
   title: "Computer Assemble",

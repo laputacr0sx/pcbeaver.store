@@ -1,5 +1,6 @@
 "use client";
 
+import { auth } from "@/components/AuthPage/SigninForm";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,8 +14,9 @@ import { usePutItemToCart } from "@/hooks/cart/usePutItemToCart";
 import { useGetProductByPid } from "@/hooks/product/useGetProductByPid";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
@@ -29,6 +31,7 @@ const validateQuantity = (quantity: number) => {
 
 function AddtoCartForm() {
   const { pid } = useParams<{ pid: string }>();
+  const [user] = useAuthState(auth);
 
   const addToCartForm = useForm<z.infer<typeof addToCartFormSchema>>({
     resolver: zodResolver(addToCartFormSchema),
@@ -117,13 +120,26 @@ function AddtoCartForm() {
             )}
           />
         </section>
-        <Button
-          type="submit"
-          className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-          disabled={isPending}
-        >
-          Add To Cart
-        </Button>
+        {!!user ? (
+          <Button
+            type="submit"
+            className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+            disabled={isPending}
+          >
+            Add To Cart
+          </Button>
+        ) : (
+          <Link
+            href="/signin"
+            className="text-sm font-medium text-gray-700 hover:text-gray-800"
+          >
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-500">
+              <span className="font-medium leading-none text-white">
+                Sign in To Add item to Cart
+              </span>
+            </span>
+          </Link>
+        )}
       </form>
     </Form>
   );

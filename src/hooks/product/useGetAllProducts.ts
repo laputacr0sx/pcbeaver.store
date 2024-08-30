@@ -2,7 +2,7 @@ import { fetchProduct } from "@/lib/fetcher";
 import {
   type Product,
   type PaginatedResponseDTO,
-} from "@/type/product/dto/res/GetAllProductsDTO";
+} from "@/type/product/dto/res/GetAllProductsDTO.type";
 import { useQuery } from "@tanstack/react-query";
 
 export type BriefProduct = Omit<Product, "stock"> & { hasStock: boolean };

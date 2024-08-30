@@ -1,5 +1,5 @@
 import { fetchProduct } from "@/lib/fetcher";
-import { type Product } from "@/type/product/dto/res/GetAllProductsDTO";
+import { type Product } from "@/type/product/dto/res/GetAllProductsDTO.type";
 import { useQuery } from "@tanstack/react-query";
 
 export const getProductByPid = async (id: string) => {

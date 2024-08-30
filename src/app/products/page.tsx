@@ -1,11 +1,11 @@
-import LandingPage from "@/components/landing/LandingPage";
+import LandingPage from "@/components/LandingPage/LandingPage";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
 import { Suspense } from "react";
-import LoadingProdcts from "./loading";
+import LoadingProducts from "./loading";
 import { getAllProducts } from "@/hooks/product/useGetAllProducts";
 
 async function ProductListPage() {
@@ -18,7 +18,7 @@ async function ProductListPage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Suspense fallback={<LoadingProdcts />}>
+      <Suspense fallback={<LoadingProducts />}>
         <LandingPage />
       </Suspense>
     </HydrationBoundary>

@@ -1,7 +1,9 @@
+'use client'
+
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
 
-function LoadingProdcts() {
+function LoadingProducts() {
   return (
     <Skeleton className="bg-white">
       <Skeleton className="mx-auto max-w-7xl overflow-hidden sm:px-6 lg:px-8">
@@ -26,4 +28,4 @@ function LoadingProdcts() {
   );
 }
 
-export default LoadingProdcts;
+export default LoadingProducts;

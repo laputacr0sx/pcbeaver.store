@@ -42,8 +42,6 @@ export const HERO_NAV = {
   ],
   pages: [
     { name: "Computer Parts", href: "/products" },
-    { name: "Company", href: "#" },
-    { name: "Stores", href: "#" },
   ],
 };
 

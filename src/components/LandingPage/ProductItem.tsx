@@ -1,7 +1,7 @@
 import { type Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { type Product } from "@/type/product/dto/res/GetAllProductsDTO";
+import { type Product } from "@/type/product/dto/res/GetAllProductsDTO.type";
 import { type ComponentProps } from "react";
 
 type ProductProps = ComponentProps<typeof Card> & Product;

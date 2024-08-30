@@ -1,4 +1,4 @@
-"user client";
+"use client";
 
 import { firebaseApp } from "@/lib/authService";
 import { getAuth, signOut } from "firebase/auth";

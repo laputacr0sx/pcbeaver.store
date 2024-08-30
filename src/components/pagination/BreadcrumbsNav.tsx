@@ -1,10 +1,10 @@
-import { type Product } from "@/type/product/dto/res/GetAllProductsDTO";
+import { type Product } from "@/type/product/dto/res/GetAllProductsDTO.type";
 import React from "react";
 
-function BreadcrumbsNav({ product }: { product: Product }) {
+function BreadcrumbsNav({ product }: Readonly<{ product: Product }>) {
   return (
     <nav aria-label="Breadcrumb">
-      <ol role="list" className="flex items-center space-x-2">
+      <ol className="flex items-center space-x-2">
         <li>
           <div className="flex items-center text-sm">
             <a
