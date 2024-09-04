@@ -40,9 +40,7 @@ export const HERO_NAV = {
       ],
     },
   ],
-  pages: [
-    { name: "Computer Parts", href: "/products" },
-  ],
+  pages: [{ name: "Computer Parts", href: "/products" }],
 };
 
 export const FAVOURITES = [
@@ -77,17 +75,14 @@ export const FAVOURITES = [
 ];
 
 export const FOOT_NAV = {
-  shop: [{ name: "Bags", href: "#" }],
-  company: [
-    { name: "Who we are", href: "#" },
-    { name: "Bags", href: "#" },
+  shop: [
+    { name: "Category", href: "/category/" },
+    { name: "Brand", href: "/category/brand/" },
   ],
-  account: [
-    { name: "Manage Account", href: "#" },
-    { name: "Bags", href: "#" },
-  ],
+  company: [{ name: "Who am I", href: "#" }],
+  account: [{ name: "Manage Account", href: "#" }],
   connect: [
-    { name: "Contact Us", href: "#" },
-    { name: "Bags", href: "#" },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/vvfelix" },
+    { name: "Github", href: "https://www.github.com/laputacr0sx" },
   ],
 };
