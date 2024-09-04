@@ -1,6 +1,7 @@
 "use client";
 
 import useGetCartItems from "@/hooks/cart/useGetCartItems";
+import { useRemoveCartItem } from "@/hooks/cart/useRemoveCartItem";
 import {
   CheckIcon,
   ClockIcon,
@@ -8,6 +9,7 @@ import {
   XMarkIcon as XMarkIconMini,
 } from "@heroicons/react/20/solid";
 import Image from "next/image";
+import Link from "next/link";
 
 function ShoppingCartPage() {
   const {
@@ -18,11 +20,14 @@ function ShoppingCartPage() {
     isSuccess,
   } = useGetCartItems();
 
+  const { mutate: removeCartItem, isPending: removingCartItem } =
+    useRemoveCartItem();
+
   if (isLoading) return <div>I am Loading...</div>;
   if (isError) return <div>{error.message}</div>;
   if (!isSuccess) return <div>Loading...</div>;
 
-  // console.table(cartItems);
+  console.table(cartItems);
 
   const SHIPPING = 40.0;
   const total = cartItems.reduce((prev, curr) => {
@@ -47,6 +52,7 @@ function ShoppingCartPage() {
           >
             {cartItems?.map((product, productIdx) => {
               const subTotal = product.price * product.cartQuantity;
+
               return (
                 <li key={product.pid} className="flex py-6 sm:py-10">
                   <div className="flex-shrink-0">
@@ -64,12 +70,13 @@ function ShoppingCartPage() {
                       <div>
                         <div className="flex justify-between">
                           <h3 className="text-sm">
-                            <a
-                              // href={product}
+                            <Link
+                              href={`/products/${product.pid}`}
+                              target="_blank"
                               className="font-medium text-gray-700 hover:text-gray-800"
                             >
                               {product.name}
-                            </a>
+                            </Link>
                           </h3>
                         </div>
                         <p className="mt-1 text-sm font-medium text-gray-900">
@@ -84,25 +91,19 @@ function ShoppingCartPage() {
                         >
                           Quantity, {product.cartQuantity}
                         </label>
-                        <select
+                        <input
                           id={`quantity-${productIdx}`}
                           name={`quantity-${productIdx}`}
+                          defaultValue={product.cartQuantity}
                           className="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                        >
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                          <option value={3}>3</option>
-                          <option value={4}>4</option>
-                          <option value={5}>5</option>
-                          <option value={6}>6</option>
-                          <option value={7}>7</option>
-                          <option value={8}>8</option>
-                        </select>
+                        />
 
                         <div className="absolute right-0 top-0">
                           <button
                             type="button"
                             className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
+                            onClick={() => removeCartItem(product.pid)}
+                            disabled={removingCartItem}
                           >
                             <span className="sr-only">Remove</span>
                             <XMarkIconMini

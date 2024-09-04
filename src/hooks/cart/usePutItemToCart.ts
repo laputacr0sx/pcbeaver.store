@@ -1,6 +1,6 @@
 import { firebaseApp } from "@/lib/authService";
 import { fetchCart } from "@/lib/fetcher";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { getAuth, type User } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -11,8 +11,6 @@ async function putItemToCart(
   pid: number | string,
   quantity: number,
 ) {
-  console.log("From putItemToCart", user, pid, quantity);
-
   const res = await fetchCart.put<{ result: string }>(
     `/${pid}/${quantity}`,
     null,
