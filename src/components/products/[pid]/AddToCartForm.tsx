@@ -14,6 +14,7 @@ import { usePutItemToCart } from "@/hooks/cart/usePutItemToCart";
 import { useGetProductByPid } from "@/hooks/product/useGetProductByPid";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -24,10 +25,6 @@ import { z } from "zod";
 const addToCartFormSchema = z.object({
   quantity: z.number(),
 });
-
-const validateQuantity = (quantity: number) => {
-  return true;
-};
 
 function AddtoCartForm() {
   const { pid } = useParams<{ pid: string }>();
@@ -40,21 +37,14 @@ function AddtoCartForm() {
     },
   });
 
-  const { mutate, isPending } = usePutItemToCart(
-    pid,
-    addToCartForm.getValues("quantity"),
-  );
+  const { mutate: putItemToCart, isPending } = usePutItemToCart();
 
   const { data: product, isSuccess, isError, error } = useGetProductByPid(pid);
 
-  async function onSubmit(data: z.infer<typeof addToCartFormSchema>) {
-    console.log("From obSubmit data", data.quantity);
-
+  async function onSubmit({ quantity }: z.infer<typeof addToCartFormSchema>) {
     event?.preventDefault();
-    mutate(undefined, {
-      onSuccess: () => toast.success("Successfully added to cart!"),
-    });
 
+    putItemToCart({ pid, quantity });
     addToCartForm.reset();
   }
 
@@ -114,7 +104,6 @@ function AddtoCartForm() {
                     <PlusIcon className="h-5 w-5 flex-shrink-0" />
                   </button>
                 </FormControl>
-                {/* <FormDescription>Input your login email.</FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -129,16 +118,15 @@ function AddtoCartForm() {
             Add To Cart
           </Button>
         ) : (
-          <Link
-            href="/signin"
-            className="text-sm font-medium text-gray-700 hover:text-gray-800"
+          <Button
+            type="submit"
+            className="flex w-full items-center justify-center rounded-md border border-transparent bg-rose-600 px-8 py-3 text-base font-medium text-white hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+            disabled={isPending}
           >
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-500">
-              <span className="font-medium leading-none text-white">
-                Sign in To Add item to Cart
-              </span>
-            </span>
-          </Link>
+            <Link href="/signin" className="text-sm font-medium">
+              Sign in To Add item to Cart
+            </Link>
+          </Button>
         )}
       </form>
     </Form>

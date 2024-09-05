@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Separator } from "../ui/separator";
 import GoogleSignInButton from "./GoogleSignInButton";
+import { useRouter } from "next/navigation";
 
 export const auth = getAuth(firebaseApp);
 
@@ -28,6 +29,7 @@ const signInFormSchema = z.object({
 });
 
 function SigninForm() {
+  const r = useRouter();
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
@@ -42,8 +44,8 @@ function SigninForm() {
   async function onSubmit(values: z.infer<typeof signInFormSchema>) {
     // const firebaseUser = await handleSignInWithCredentials({ ...values });
     await signInWithEmailAndPassword(values.email, values.password);
-
     signInForm.reset();
+    r.back();
   }
 
   return (

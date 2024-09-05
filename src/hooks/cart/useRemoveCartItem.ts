@@ -25,12 +25,16 @@ export function useRemoveCartItem() {
 
   return useMutation({
     mutationFn: (pid: number) => removeCartItem(user, pid),
-
     onMutate: () => {
-      console.log("mutating...");
+      console.log(`Removing Cart Item`);
     },
+
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["cart"] });
+    },
+
+    onError: (e) => {
+      console.error(e.message);
     },
   });
 }

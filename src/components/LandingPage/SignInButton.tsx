@@ -27,6 +27,7 @@ function AuthenticationButton() {
       </div>
     );
   }
+
   if (user) {
     const emailName =
       user.email?.split("@")[0]?.substring(0, 2).toUpperCase() ?? "GG";
@@ -34,7 +35,9 @@ function AuthenticationButton() {
     return (
       <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
         <Link
-          onClick={() => signOut(auth)}
+          onClick={async () => {
+            await signOut(auth);
+          }}
           href="#"
           className="text-sm font-medium text-gray-700 hover:text-gray-800"
         >

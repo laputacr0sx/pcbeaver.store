@@ -1,8 +1,9 @@
 import { firebaseApp } from "@/lib/authService";
 import { fetchCart } from "@/lib/fetcher";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getAuth, type User } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 
 export const auth = getAuth(firebaseApp);
 
@@ -20,17 +21,31 @@ async function putItemToCart(
       },
     },
   );
+
   return res.data;
 }
 
-export function usePutItemToCart(pid: number | string, quantity: number) {
+export function usePutItemToCart() {
+  const queryClient = useQueryClient();
   const [user] = useAuthState(auth);
 
   return useMutation({
-    mutationFn: () => putItemToCart(user, pid, quantity),
+    mutationFn: ({
+      pid,
+      quantity,
+    }: {
+      pid: number | string;
+      quantity: number;
+    }) => putItemToCart(user, pid, quantity),
+    onError(error, variables, context) {
+      toast.error(`Something went wrong!, ${error?.message}`);
+    },
 
-    onMutate: () => {
-      console.log("mutating...");
+    async onSuccess(data, variables, context) {
+      console.table(data);
+
+      await queryClient.invalidateQueries({ queryKey: ["cart"] });
+      toast.success(`Added ${variables.quantity} to your cart!`);
     },
   });
 }
