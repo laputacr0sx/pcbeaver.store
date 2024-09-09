@@ -180,7 +180,7 @@ export default function PageHeader() {
 
       {/* ---- */}
       {/* This is the end of the Mobile Menu component. */}
-      {/* This is start of the Desktop Version*/}
+      {/* This is a start of the Desktop Version*/}
       {/* ---- */}
 
       {/* Hero section */}
@@ -226,54 +226,117 @@ export default function PageHeader() {
                       {/* Flyout menus */}
                       <PopoverGroup className="inset-x-0 bottom-0 px-4">
                         <div className="flex h-full justify-center space-x-8">
-                          {navigation.categories.map((category) => (
-                            <Popover key={category.name} className="flex">
-                              <div className="relative flex">
-                                <PopoverButton className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
-                                  {category.name}
-                                  <span
-                                    aria-hidden="true"
-                                    className="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out group-data-[open]:bg-white"
-                                  />
-                                </PopoverButton>
-                              </div>
 
-                              <PopoverPanel
-                                transition
-                                className="absolute inset-x-0 top-full text-sm text-gray-500 transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
-                              >
-                                {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                                <div
+                          <Popover key="Brands" className="flex">
+                            <div className="relative flex">
+                              <PopoverButton className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
+                                Brands
+                                <span
                                   aria-hidden="true"
-                                  className="absolute inset-0 top-1/2 bg-white shadow"
+                                  className="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out group-data-[open]:bg-white"
                                 />
+                              </PopoverButton>
+                            </div>
 
-                                <div className="relative bg-white">
-                                  <div className="mx-auto max-w-7xl px-1 sm:px-2 lg:px-4">
-                                    <div className="grid grid-cols-4 gap-x-2 gap-y-4 py-4">
-                                      {category.featured.map((item) => (
-                                        <div
-                                          key={item.name}
-                                          className="group relative"
+                            <PopoverPanel
+                              transition
+                              className="absolute inset-x-0 top-full text-sm text-gray-500 transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                            >
+                              {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
+                              <div
+                                aria-hidden="true"
+                                className="absolute inset-0 top-1/2 bg-white shadow"
+                              />
+
+                              <div className="relative bg-white">
+                                <div className="mx-auto max-w-7xl px-1 sm:px-2 lg:px-4">
+                                  <div className="grid grid-cols-4 gap-x-2 gap-y-4 py-4">
+                                    {brands?.slice(0,30).map((brand) => (
+                                      <div
+                                        key={brand}
+                                        className="group relative"
+                                      >
+                                        <Link
+                                          href={`/brands/${brand}`}
+                                          className="mt-1 block font-medium text-gray-900"
                                         >
-                                          <Link
-                                            href={item.href}
-                                            className="mt-1 block font-medium text-gray-900"
-                                          >
-                                            <span
-                                              aria-hidden="true"
-                                              className="absolute inset-0 z-10"
-                                            />
-                                            {item.name}
-                                          </Link>
-                                        </div>
-                                      ))}
+                                          <span
+                                            aria-hidden="true"
+                                            className="absolute inset-0 z-10"
+                                          />
+                                          {brand}
+                                        </Link>
+                                      </div>
+                                    ))}
+                                    <div
+                                      key={"extra..."}
+                                      className="group relative"
+                                    >
+                                      <span
+                                        aria-hidden="true"
+                                        className="absolute inset-0 z-10"
+                                      /> ...
                                     </div>
                                   </div>
                                 </div>
-                              </PopoverPanel>
-                            </Popover>
-                          ))}
+                              </div>
+                            </PopoverPanel>
+                          </Popover>
+                          <Popover key="Categories" className="flex">
+                            <div className="relative flex">
+                              <PopoverButton className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
+                                Categories
+                                <span
+                                  aria-hidden="true"
+                                  className="absolute inset-x-0 -bottom-px h-0.5 transition duration-200 ease-out group-data-[open]:bg-white"
+                                />
+                              </PopoverButton>
+                            </div>
+
+                            <PopoverPanel
+                              transition
+                              className="absolute inset-x-0 top-full text-sm text-gray-500 transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                            >
+                              {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
+                              <div
+                                aria-hidden="true"
+                                className="absolute inset-0 top-1/2 bg-white shadow"
+                              />
+
+                              <div className="relative bg-white">
+                                <div className="mx-auto max-w-7xl px-1 sm:px-2 lg:px-4">
+                                  <div className="grid grid-cols-4 gap-x-2 gap-y-4 py-4">
+                                    {categories?.map((category) => (
+                                      <div
+                                        key={category}
+                                        className="group relative"
+                                      >
+                                        <Link
+                                          href={`/categories/${category}`}
+                                          className="mt-1 block font-medium text-gray-900"
+                                        >
+                                          <span
+                                            aria-hidden="true"
+                                            className="absolute inset-0 z-10"
+                                          />
+                                          {category}
+                                        </Link>
+                                      </div>
+                                    ))}
+                                    <div
+                                      key={"extra..."}
+                                      className="group relative"
+                                    >
+                                      <span
+                                        aria-hidden="true"
+                                        className="absolute inset-0 z-10"
+                                      /> ...
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </PopoverPanel>
+                          </Popover>
                         </div>
                       </PopoverGroup>
                     </div>
