@@ -2,7 +2,6 @@
 
 import { firebaseApp } from "@/lib/authService";
 import { getAuth, signOut } from "firebase/auth";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Skeleton } from "../ui/skeleton";

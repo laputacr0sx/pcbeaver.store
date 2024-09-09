@@ -14,9 +14,9 @@ function ShoppingCart() {
         <Link href="/" className="group -m-2 flex items-center p-2">
           <ShoppingBagIcon
             aria-hidden="true"
-            className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+            className="h-6 w-6 flex-shrink-0 text-lime-400 group-hover:text-lime-500"
           />
-          <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+          <span className="ml-2 text-sm font-medium text-lime-700 group-hover:text-lime-800">
             0
           </span>
           <span className="sr-only">items in cart, view bag</span>
@@ -41,9 +41,9 @@ function ShoppingCart() {
       <Link href="/cart" className="group -m-2 flex items-center p-2">
         <ShoppingBagIcon
           aria-hidden="true"
-          className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+          className="h-6 w-6 flex-shrink-0 text-lime-400 group-hover:text-lime-500"
         />
-        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+        <span className="ml-2 text-sm font-medium text-lime-700 group-hover:text-lime-800">
           {totalItems}
         </span>
         <span className="sr-only">items in cart, view bag</span>
