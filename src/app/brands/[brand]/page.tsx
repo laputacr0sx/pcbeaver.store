@@ -5,12 +5,13 @@ import { ShowPrice, ShowStock } from "@/components/LandingPage/ProductItem";
 import PaginationBar from "@/components/pagination/PaginationBar";
 import { Separator } from "@/components/ui/separator";
 import useGetProductsByCategory from "@/hooks/product/useGetProductsByCategory";
-import type { Category } from "@/type/product/dto/res/GetAllProductsDTO.type";
+import type { Brand, Category } from "@/type/product/dto/res/GetAllProductsDTO.type";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Suspense, useState } from "react";
+import useGetProductsByBrand from "@/hooks/product/useGetProductsByBrand";
 
 function CategoryProducts() {
   return (
@@ -21,23 +22,23 @@ function CategoryProducts() {
 }
 
 function CategoryProductsPage() {
-  const { category } = useParams<{ category: Category }>();
+  const { brand } = useParams<{ brand: Brand }>();
 
   const [page, setPage] = useState<number>(0);
 
   const {
-    data: productsByCategory,
+    data: allProducts,
     isLoading,
     isSuccess,
     error,
     isError,
-  } = useGetProductsByCategory(category, page);
+  } = useGetProductsByBrand(brand, page);
 
   if (isLoading)
     return (
       <div className="bg-white">
         <div className="mx-auto max-w-7xl overflow-hidden sm:px-6 lg:px-8">
-          <h2 className="sr-only">Products of {category}</h2>
+          <h2 className="sr-only">All Products</h2>
           <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
             {new Array(20).map((_, i) => {
               return <div key={i}>hello</div>;
@@ -55,9 +56,9 @@ function CategoryProductsPage() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl overflow-hidden sm:px-6 lg:px-8">
-        <h2 className="sr-only">Products of {category}</h2>
+        <h2 className="sr-only">Products of {brand}</h2>
         <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
-          {productsByCategory.content?.map((product) => (
+          {allProducts.content?.map((product) => (
             <div
               key={product.pid}
               className="group relative border-b border-r border-gray-200 p-4 sm:p-6"
@@ -84,7 +85,7 @@ function CategoryProductsPage() {
             </div>
           ))}
         </div>
-        <PaginationBar page={page} setPage={setPage} {...productsByCategory} />
+        <PaginationBar page={page} setPage={setPage} {...allProducts} />
       </div>
     </div>
   );

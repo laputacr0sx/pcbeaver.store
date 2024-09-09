@@ -2,7 +2,6 @@
 
 import ShoppingCart from "@/components/LandingPage/Cart";
 import SignInButton from "@/components/LandingPage/SignInButton";
-import { navigation } from "@/constants/navigations";
 import { fetchBrand, fetchCategory } from "@/lib/fetcher";
 import {
   type Brand,
