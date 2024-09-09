@@ -1,14 +1,28 @@
 "use client";
 
-import { useGetAllProducts } from "@/hooks/product/useGetAllProducts";
+import LoadingProducts from "@/app/products/loading";
+import { ShowPrice, ShowStock } from "@/components/LandingPage/ProductItem";
+import PaginationBar from "@/components/pagination/PaginationBar";
+import { Separator } from "@/components/ui/separator";
+import useGetProductsByCategory from "@/hooks/product/useGetProductsByCategory";
+import type { Category } from "@/type/product/dto/res/GetAllProductsDTO.type";
+
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import PaginationBar from "../pagination/PaginationBar";
-import { Separator } from "../ui/separator";
-import { ShowPrice, ShowStock } from "./ProductItem";
+import { useParams } from "next/navigation";
+import { Suspense, useState } from "react";
 
-export default function LandingPage() {
+function CategoryProducts() {
+  return (
+    <Suspense fallback={<LoadingProducts />}>
+      <CategoryProductsPage />
+    </Suspense>
+  );
+}
+
+function CategoryProductsPage() {
+  const { category } = useParams<{ category: Category }>();
+
   const [page, setPage] = useState<number>(0);
 
   const {
@@ -17,7 +31,7 @@ export default function LandingPage() {
     isSuccess,
     error,
     isError,
-  } = useGetAllProducts(page);
+  } = useGetProductsByCategory(category, page);
 
   if (isLoading)
     return (
@@ -34,14 +48,16 @@ export default function LandingPage() {
       </div>
     );
 
-  if (!isSuccess) return null;
+  if (!isSuccess) {
+    return null;
+  }
 
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl overflow-hidden sm:px-6 lg:px-8">
         <h2 className="sr-only">All Products</h2>
         <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
-          {allProducts?.content?.map((product) => (
+          {allProducts.content?.map((product) => (
             <div
               key={product.pid}
               className="group relative border-b border-r border-gray-200 p-4 sm:p-6"
@@ -73,3 +89,5 @@ export default function LandingPage() {
     </div>
   );
 }
+
+export default CategoryProducts;

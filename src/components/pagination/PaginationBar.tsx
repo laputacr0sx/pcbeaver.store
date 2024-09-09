@@ -1,11 +1,6 @@
 "use client";
 
-import { useGetAllProducts } from "@/hooks/product/useGetAllProducts";
 import { cn } from "@/lib/utils";
-import {
-  type PaginatedResponseDTO,
-  type Product,
-} from "@/type/product/dto/res/GetAllProductsDTO.type";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { type Dispatch, type SetStateAction } from "react";
 import { Button } from "../ui/button";
@@ -17,22 +12,39 @@ import ShowElementsDetailsLabel, {
 type PaginationBarProps = {
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
+  last: boolean;
+  pageNo: number;
+  pageSize: number;
+  totalElements: number;
+  totalPages: number;
 };
 
-export default function PaginationBar({ page, setPage }: PaginationBarProps) {
-  const { data: pageData, isSuccess } = useGetAllProducts(page);
-
-  if (!isSuccess) return <p>Loading...</p>;
-
-  const { last, pageNo, pageSize, totalElements, totalPages } =
-    pageData as Omit<PaginatedResponseDTO<Product>, "content">;
-
+export default function PaginationBar({
+  page,
+  setPage,
+  last,
+  pageNo,
+  pageSize,
+  totalElements,
+  totalPages,
+}: PaginationBarProps) {
   const { beginOfSlice, endOfSlice } = sliceInfo(
     pageNo,
     pageSize,
     totalElements,
   );
 
+  console.table({
+    page,
+    setPage,
+    last,
+    pageNo,
+    pageSize,
+    totalElements,
+    totalPages,
+    beginOfSlice,
+    endOfSlice,
+  });
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">

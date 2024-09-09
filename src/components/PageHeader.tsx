@@ -1,7 +1,13 @@
 "use client";
+
 import ShoppingCart from "@/components/LandingPage/Cart";
 import SignInButton from "@/components/LandingPage/SignInButton";
 import { navigation } from "@/constants/navigations";
+import { fetchBrand, fetchCategory } from "@/lib/fetcher";
+import {
+  type Brand,
+  type Category,
+} from "@/type/product/dto/res/GetAllProductsDTO.type";
 import {
   Dialog,
   DialogBackdrop,
@@ -21,11 +27,31 @@ import {
   MagnifyingGlassIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { useQueries } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 export default function PageHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const [{ data: brands }, { data: categories }] = useQueries({
+    queries: [
+      {
+        queryKey: ["brands"],
+        queryFn: async () => {
+          const { data } = await fetchBrand.get<Brand[]>("");
+          return data;
+        },
+      },
+      {
+        queryKey: ["categories"],
+        queryFn: async () => {
+          const { data } = await fetchCategory.get<Category[]>("");
+          return data;
+        },
+      },
+    ],
+  });
 
   return (
     <>
@@ -59,18 +85,55 @@ export default function PageHeader() {
             <TabGroup className="mt-2">
               <div className="border-b border-gray-200">
                 <TabList className="-mb-px flex space-x-8 px-4">
-                  {navigation.categories.map((category) => (
-                    <Tab
-                      key={category.name}
-                      className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-indigo-600 data-[selected]:text-indigo-600"
-                    >
-                      {category.name}
-                    </Tab>
-                  ))}
+                  <Tab className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-indigo-600 data-[selected]:text-indigo-600">
+                    Categories
+                  </Tab>
+                  <Tab
+                    key="Brands"
+                    className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-indigo-600 data-[selected]:text-indigo-600"
+                  >
+                    Brands
+                  </Tab>
                 </TabList>
               </div>
               <TabPanels as={Fragment}>
-                {navigation.categories.map((category) => (
+                <TabPanel key="Categories" className="space-y-4 px-1 py-2">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                    {categories?.map((cat) => (
+                      <div key={cat} className="group relative">
+                        <Link
+                          href={`/categories/${cat}`}
+                          className="mt-6 block text-sm font-medium text-gray-900"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-0 z-10"
+                          />
+                          {cat}
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                </TabPanel>
+                <TabPanel className="space-y-4 px-1 py-2">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                    {brands?.map((brand) => (
+                      <div key={brand} className="group relative">
+                        <Link
+                          href={`/brands/${brand}`}
+                          className="mt-6 block text-sm font-medium text-gray-900"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-0 z-10"
+                          />
+                          {brand}
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                </TabPanel>
+                {/* {navigation.categories.map((category) => (
                   <TabPanel key={category.name} className="space-y-4 px-1 py-2">
                     <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                       {category.featured.map((item) => (
@@ -89,7 +152,7 @@ export default function PageHeader() {
                       ))}
                     </div>
                   </TabPanel>
-                ))}
+                ))} */}
               </TabPanels>
             </TabGroup>
 
