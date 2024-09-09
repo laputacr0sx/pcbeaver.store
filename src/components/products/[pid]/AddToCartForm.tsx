@@ -14,12 +14,10 @@ import { usePutItemToCart } from "@/hooks/cart/usePutItemToCart";
 import { useGetProductByPid } from "@/hooks/product/useGetProductByPid";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { z } from "zod";
 
 const addToCartFormSchema = z.object({
@@ -120,7 +118,7 @@ function AddtoCartForm() {
         ) : (
           <Button
             type="submit"
-            className="flex w-full items-center justify-center rounded-md border border-transparent bg-rose-600 px-8 py-3 text-base font-medium text-white hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+            className="flex w-full items-center justify-center rounded-md border border-transparent bg-amber-600 px-8 py-3 text-base font-medium text-white hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-gray-50"
             disabled={isPending}
           >
             <Link href="/signin" className="text-sm font-medium">

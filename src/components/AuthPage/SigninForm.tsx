@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,12 +13,12 @@ import { Input } from "@/components/ui/input";
 import { firebaseApp } from "@/lib/authService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getAuth } from "firebase/auth";
+import { useRouter } from "next/navigation";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Separator } from "../ui/separator";
+import { Divider } from "../tailwindui/divider";
 import GoogleSignInButton from "./GoogleSignInButton";
-import { useRouter } from "next/navigation";
 
 export const auth = getAuth(firebaseApp);
 
@@ -80,7 +79,8 @@ function SigninForm() {
         <Button type="submit" disabled={loading}>
           Submit
         </Button>
-        <Separator className="my-4 h-1 rounded-md py-1" />
+        <Divider className="py-4" />
+        {/* <Separator className="my-5 h-1 rounded-md py-1" /> */}
         <GoogleSignInButton auth={auth} />
       </form>
     </Form>
