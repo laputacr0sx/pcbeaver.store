@@ -10,6 +10,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import ReactQueryClientProvider from "@/provider/QueryClientProvider";
 import PageFooter from "@/components/PageFooter";
+import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Computer Assemble",
@@ -55,6 +56,7 @@ export default function RootLayout({
         <ReactQueryClientProvider>
           <Toaster position="top-right" />
           {/* <HeroHeader /> */}
+          <PageHeader />
           {children}
           {/* <LandingPageFooter /> */}
           <PageFooter />
