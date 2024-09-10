@@ -1,4 +1,4 @@
-import { type Product } from "@/type/product/dto/res/GetAllProductsDTO.type";
+import { type Product } from "@/type/Product.type";
 import React from "react";
 
 function BreadcrumbsNav({ product }: Readonly<{ product: Product }>) {
