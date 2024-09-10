@@ -18,18 +18,19 @@ import Link from "next/link";
 import { useMemo, type BaseSyntheticEvent } from "react";
 import { useFieldArray, useForm, type FieldErrors } from "react-hook-form";
 import { z } from "zod";
+import { usePrepareTransaction } from "@/hooks/transaction/usePrepareTransaction";
 
 const cartFormSchema = z.object({
   items: z
-    .object({
-      pid: z.number(),
-      name: z.string(),
-      imageUrl: z.string(),
-      price: z.number(),
-      cartQuantity: z.coerce.number().gt(0),
-      stock: z.number().nonnegative(),
-    })
-    .array(),
+  .object({
+    pid: z.number(),
+    name: z.string(),
+    imageUrl: z.string(),
+    price: z.number(),
+    cartQuantity: z.coerce.number().gt(0),
+    stock: z.number().nonnegative(),
+  })
+  .array(),
   total: z.number(),
 });
 
@@ -38,7 +39,7 @@ type CartFormProps = {
 };
 
 function CartForm({ items }: CartFormProps) {
-  const SHIPPING = 40;
+  const SHIPPING = 0;
 
   const { mutate: removeCartItem, isPending: removingCartItem } =
     useRemoveCartItem();
@@ -46,9 +47,15 @@ function CartForm({ items }: CartFormProps) {
   const {
     mutate: updateCartQuantity,
     isPending: updatingCartQuantity,
-    isSuccess: isUpdateCartQuantitySuccess,
+    isSuccess: isCartQuantityUpdated,
     error: updateCartQuantityError,
   } = useUpdateCartQuantity();
+
+  const {
+    mutate: prepareTransaction,
+    isPending: preparingTransaction,
+    isSuccess: transactionIsPrepared, error: prepareTransactionError
+  } = usePrepareTransaction();
 
   const cartForm = useForm<z.infer<typeof cartFormSchema>>({
     resolver: zodResolver(cartFormSchema),
@@ -63,9 +70,6 @@ function CartForm({ items }: CartFormProps) {
     name: "items",
   });
 
-  // const total = items.reduce((prev, curr) => {
-  //   return prev + curr.price * curr.cartQuantity;
-  // }, 0);
 
   const total = useMemo(
     () =>
@@ -77,17 +81,13 @@ function CartForm({ items }: CartFormProps) {
 
   function onValidCartSubmit(
     data: z.infer<typeof cartFormSchema>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    evt: BaseSyntheticEvent<object, any, any> | undefined,
   ) {
-    console.log("good to know");
     console.table(data);
+    prepareTransaction();
   }
 
   function onInvalidCartSubmit(
     err: FieldErrors<z.infer<typeof cartFormSchema>>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    evt: BaseSyntheticEvent<object, any, any> | undefined,
   ) {
     console.error(err);
   }
@@ -439,7 +439,7 @@ function ShoppingCartPage() {
       {/*   </section> */}
       {/* </form> */}
 
-      <CartForm items={cartItems} />
+      <CartForm items={cartItems}/>
     </main>
   );
 }

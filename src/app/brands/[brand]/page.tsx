@@ -38,7 +38,7 @@ function CategoryProductsPage() {
     return (
       <div className="bg-white">
         <div className="mx-auto max-w-7xl overflow-hidden sm:px-6 lg:px-8">
-          <h2 className="sr-only">All Products</h2>
+          <h2 className="sr-only">Products of {brand}</h2>
           <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
             {new Array(20).map((_, i) => {
               return <div key={i}>hello</div>;

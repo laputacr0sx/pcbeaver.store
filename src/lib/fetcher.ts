@@ -20,3 +20,7 @@ export const fetchBrand = axios.create({
 export const fetchCart = axios.create({
   baseURL: `${env.NEXT_PUBLIC_DATABASE_URL}/cart`,
 });
+
+export const fetchTransaction = axios.create({
+  baseURL: `${env.NEXT_PUBLIC_DATABASE_URL}/trans`,
+})
