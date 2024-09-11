@@ -47,10 +47,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html className="bg-white dark:bg-zinc-900 lg:bg-zinc-100 dark:lg:bg-zinc-950">
+    <html className="h-full bg-white dark:bg-zinc-900 lg:bg-zinc-100 dark:lg:bg-zinc-950">
       <body
         className={
-          (cn("min-h-screen w-full font-sans antialiased"), fontSans.variable)
+          (cn("h-hull min-h-screen w-full font-sans antialiased"),
+          fontSans.variable)
         }
       >
         <ReactQueryClientProvider>

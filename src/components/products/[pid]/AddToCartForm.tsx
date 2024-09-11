@@ -37,7 +37,7 @@ function AddtoCartForm() {
 
   const { mutate: putItemToCart, isPending } = usePutItemToCart();
 
-  const { data: product, isSuccess, isError, error } = useGetProductByPid(pid);
+  // const { data: product, isSuccess, isError, error } = useGetProductByPid(pid);
 
   async function onSubmit({ quantity }: z.infer<typeof addToCartFormSchema>) {
     event?.preventDefault();
