@@ -77,7 +77,7 @@ export default function PageHeader() {
                 className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
               >
                 <span className="sr-only">Close menu</span>
-                <XMarkIcon aria-hidden="true" className="h-6 w-6"/>
+                <XMarkIcon aria-hidden="true" className="h-6 w-6" />
               </button>
             </div>
 
@@ -85,15 +85,13 @@ export default function PageHeader() {
             <TabGroup className="mt-2">
               <div className="border-b border-gray-200">
                 <TabList className="-mb-px flex space-x-8 px-4">
-                  <Tab key="Brands"
-                       className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-indigo-600 data-[selected]:text-indigo-600"
-                  >
-                    <Link href={"/products"}>
-                      All
-                    </Link>
-                  </Tab>
                   <Tab
-                    className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-indigo-600 data-[selected]:text-indigo-600">
+                    key="Brands"
+                    className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-indigo-600 data-[selected]:text-indigo-600"
+                  >
+                    <Link href={"/products"}>All</Link>
+                  </Tab>
+                  <Tab className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-indigo-600 data-[selected]:text-indigo-600">
                     Categories
                   </Tab>
                   <Tab
@@ -112,10 +110,10 @@ export default function PageHeader() {
                         href={"/products"}
                         className="mt-6 block text-sm font-medium text-gray-900"
                       >
-                          <span
-                            aria-hidden="true"
-                            className="absolute inset-0 z-10"
-                          />
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-0 z-10"
+                        />
                         All Products
                       </Link>
                     </div>
@@ -157,38 +155,10 @@ export default function PageHeader() {
                     ))}
                   </div>
                 </TabPanel>
-                {/* {navigation.categories.map((category) => (
-                  <TabPanel key={category.name} className="space-y-4 px-1 py-2">
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                      {category.featured.map((item) => (
-                        <div key={item.name} className="group relative">
-                          <Link
-                            href={item.href}
-                            className="mt-6 block text-sm font-medium text-gray-900"
-                          >
-                            <span
-                              aria-hidden="true"
-                              className="absolute inset-0 z-10"
-                            />
-                            {item.name}
-                          </Link>
-                        </div>
-                      ))}
-                    </div>
-                  </TabPanel>
-                ))} */}
               </TabPanels>
             </TabGroup>
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-              {/* <div className="flow-root"> */}
-              {/*   <a */}
-              {/*     href="/auth/signup" */}
-              {/*     className="-m-2 block p-2 font-medium text-gray-900" */}
-              {/*   > */}
-              {/*     Create an account */}
-              {/*   </a> */}
-              {/* </div> */}
               <div className="flow-root">
                 <Link
                   href="/auth/signin"
@@ -250,21 +220,16 @@ export default function PageHeader() {
                       {/* Flyout menus */}
                       <PopoverGroup className="inset-x-0 bottom-0 px-4">
                         <div className="flex h-full justify-center space-x-8">
-
                           <Popover key="all" className="flex">
                             <div className="relative flex">
-                              <PopoverButton
-                                className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
-                                <Link href={"/products"}>
-                                  All Products
-                                </Link>
+                              <PopoverButton className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
+                                <Link href={"/products"}>All Products</Link>
                               </PopoverButton>
                             </div>
                           </Popover>
                           <Popover key="Brands" className="flex">
                             <div className="relative flex">
-                              <PopoverButton
-                                className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
+                              <PopoverButton className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
                                 Brands
                                 <span
                                   aria-hidden="true"
@@ -310,7 +275,8 @@ export default function PageHeader() {
                                       <span
                                         aria-hidden="true"
                                         className="absolute inset-0 z-10"
-                                      /> ...
+                                      />{" "}
+                                      ...
                                     </div>
                                   </div>
                                 </div>
@@ -319,8 +285,7 @@ export default function PageHeader() {
                           </Popover>
                           <Popover key="Categories" className="flex">
                             <div className="relative flex">
-                              <PopoverButton
-                                className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
+                              <PopoverButton className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
                                 Categories
                                 <span
                                   aria-hidden="true"
@@ -366,7 +331,8 @@ export default function PageHeader() {
                                       <span
                                         aria-hidden="true"
                                         className="absolute inset-0 z-10"
-                                      /> ...
+                                      />{" "}
+                                      ...
                                     </div>
                                   </div>
                                 </div>
@@ -385,7 +351,7 @@ export default function PageHeader() {
                         className="-ml-2 p-2 text-white"
                       >
                         <span className="sr-only">Open menu</span>
-                        <Bars3Icon aria-hidden="true" className="h-6 w-6"/>
+                        <Bars3Icon aria-hidden="true" className="h-6 w-6" />
                       </button>
 
                       {/* Search */}
@@ -419,8 +385,8 @@ export default function PageHeader() {
                       </a>
 
                       <div className="flex items-center lg:ml-8">
-                        <SignInButton/>
-                        <ShoppingCart/>
+                        <SignInButton />
+                        <ShoppingCart />
                       </div>
                     </div>
                   </div>

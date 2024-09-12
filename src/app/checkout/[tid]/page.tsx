@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/tailwindui/button";
-import { Checkbox } from "@/components/tailwindui/checkbox";
 import { Input } from "@/components/tailwindui/input";
 import {
   Form,
@@ -419,7 +418,6 @@ const paymentFormSchema = z.object({
   city: z.string().min(1, "City is required"),
   region: z.string().min(1, "State/Province is required"),
   postalCode: z.string().min(1, "Postal code is required"),
-  sameAsShipping: z.boolean(),
 });
 
 type PaymentForm = z.infer<typeof paymentFormSchema>;
@@ -427,9 +425,6 @@ type PaymentForm = z.infer<typeof paymentFormSchema>;
 function PaymentFormComponent({ tid }: { tid: number }) {
   const paymentForm = useForm<PaymentForm>({
     resolver: zodResolver(paymentFormSchema),
-    defaultValues: {
-      sameAsShipping: true,
-    },
   });
   const { mutate: payTransaction } = usePayTransaction();
 
@@ -656,29 +651,30 @@ function PaymentFormComponent({ tid }: { tid: number }) {
           </div>
         </div>
 
-        <div className="mt-6 flex space-x-2">
-          <FormField
-            control={paymentForm.control}
-            name="sameAsShipping"
-            render={({ field }) => (
-              <FormItem className="flex h-5 items-center">
-                <FormControl>
-                  <div className="flex h-5 items-center">
-                    <Checkbox
-                      {...field}
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                      checked={field.value}
-                      onChange={field.onChange}
-                    />
-                  </div>
-                </FormControl>
-                <FormLabel>
-                  Billing address is the same as shipping address
-                </FormLabel>
-              </FormItem>
-            )}
-          />
-        </div>
+        {/* <div className="mt-6 flex space-x-2"> */}
+        {/*   <FormField */}
+        {/*     control={paymentForm.control} */}
+        {/*     name="sameAsShipping" */}
+        {/*     render={({ field }) => ( */}
+        {/*       <FormItem className="flex h-5 items-center"> */}
+        {/*         <FormControl> */}
+        {/*           <div className="flex h-5 items-center"> */}
+        {/*             <Checkbox */}
+        {/*               color="teal" */}
+        {/*               {...field} */}
+        {/*               className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" */}
+        {/*               checked={field.value} */}
+        {/*               onChange={field.onChange} */}
+        {/*             /> */}
+        {/*           </div> */}
+        {/*         </FormControl> */}
+        {/*         <FormLabel> */}
+        {/*           Billing address is the same as shipping address */}
+        {/*         </FormLabel> */}
+        {/*       </FormItem> */}
+        {/*     )} */}
+        {/*   /> */}
+        {/* </div> */}
 
         <Button
           type="submit"

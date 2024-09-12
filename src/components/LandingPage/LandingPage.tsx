@@ -11,13 +11,7 @@ import { ShowPrice, ShowStock } from "./ProductItem";
 export default function LandingPage() {
   const [page, setPage] = useState<number>(0);
 
-  const {
-    data: allProducts,
-    isLoading,
-    isSuccess,
-    error,
-    isError,
-  } = useGetAllProducts(page);
+  const { data: allProducts, isLoading, isSuccess } = useGetAllProducts(page);
 
   if (isLoading)
     return (
@@ -34,7 +28,7 @@ export default function LandingPage() {
       </div>
     );
 
-  if (!isSuccess) return null;
+  if (!isSuccess) return <div>Hello</div>;
 
   return (
     <div className="bg-white">

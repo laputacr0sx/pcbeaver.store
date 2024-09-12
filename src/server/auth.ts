@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { env } from "@/env";
 import { handleSignInWithCredentials } from "@/lib/authService";
 import {

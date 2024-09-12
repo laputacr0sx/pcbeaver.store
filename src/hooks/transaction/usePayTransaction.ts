@@ -22,10 +22,10 @@ function usePayTransaction() {
 
   return useMutation({
     mutationFn: ({ tid }: { tid: number }) => payTransaction(user, tid),
-    onSuccess(data, variables) {
+    onSuccess(data) {
       console.table(data.result);
     },
-    onError(error, variables) {
+    onError(error) {
       console.error(error);
     },
   });

@@ -29,8 +29,6 @@ function CategoryProductsPage() {
     data: productsByCategory,
     isLoading,
     isSuccess,
-    error,
-    isError,
   } = useGetProductsByCategory(category, page);
 
   if (isLoading)
@@ -49,7 +47,7 @@ function CategoryProductsPage() {
     );
 
   if (!isSuccess) {
-    return null;
+    return <div>No Content</div>;
   }
 
   return (
@@ -57,7 +55,7 @@ function CategoryProductsPage() {
       <div className="mx-auto max-w-7xl overflow-hidden sm:px-6 lg:px-8">
         <h2 className="sr-only">Products of {category}</h2>
         <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
-          {productsByCategory.content?.map((product) => (
+          {productsByCategory.content.map((product) => (
             <div
               key={product.pid}
               className="group relative border-b border-r border-gray-200 p-4 sm:p-6"

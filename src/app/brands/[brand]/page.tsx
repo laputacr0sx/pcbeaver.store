@@ -4,8 +4,7 @@ import LoadingProducts from "@/app/products/loading";
 import { ShowPrice, ShowStock } from "@/components/LandingPage/ProductItem";
 import PaginationBar from "@/components/pagination/PaginationBar";
 import { Separator } from "@/components/ui/separator";
-import useGetProductsByCategory from "@/hooks/product/useGetProductsByCategory";
-import type { Brand, Category } from "@/type/product/dto/res/GetAllProductsDTO.type";
+import type { Brand } from "@/type/product/dto/res/GetAllProductsDTO.type";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -13,15 +12,15 @@ import { useParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import useGetProductsByBrand from "@/hooks/product/useGetProductsByBrand";
 
-function CategoryProducts() {
+function BrandProducts() {
   return (
     <Suspense fallback={<LoadingProducts />}>
-      <CategoryProductsPage />
+      <BrandProductsPage />
     </Suspense>
   );
 }
 
-function CategoryProductsPage() {
+function BrandProductsPage() {
   const { brand } = useParams<{ brand: Brand }>();
 
   const [page, setPage] = useState<number>(0);
@@ -30,8 +29,6 @@ function CategoryProductsPage() {
     data: allProducts,
     isLoading,
     isSuccess,
-    error,
-    isError,
   } = useGetProductsByBrand(brand, page);
 
   if (isLoading)
@@ -50,7 +47,7 @@ function CategoryProductsPage() {
     );
 
   if (!isSuccess) {
-    return null;
+    return <div>No Content</div>;
   }
 
   return (
@@ -91,4 +88,4 @@ function CategoryProductsPage() {
   );
 }
 
-export default CategoryProducts;
+export default BrandProducts;

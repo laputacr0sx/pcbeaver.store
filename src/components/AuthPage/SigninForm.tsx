@@ -29,7 +29,7 @@ const signInFormSchema = z.object({
 
 function SigninForm() {
   const r = useRouter();
-  const [signInWithEmailAndPassword, user, loading, error] =
+  const [signInWithEmailAndPassword, _, loading] =
     useSignInWithEmailAndPassword(auth);
 
   const signInForm = useForm<z.infer<typeof signInFormSchema>>({
@@ -80,7 +80,6 @@ function SigninForm() {
           Submit
         </Button>
         <Divider className="py-4" />
-        {/* <Separator className="my-5 h-1 rounded-md py-1" /> */}
         <GoogleSignInButton auth={auth} />
       </form>
     </Form>

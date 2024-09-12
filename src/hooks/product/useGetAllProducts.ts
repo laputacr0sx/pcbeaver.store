@@ -1,8 +1,6 @@
 import { fetchProduct } from "@/lib/fetcher";
-import {
-  type Product,
-  type PaginatedResponseDTO,
-} from "@/type/product/dto/res/GetAllProductsDTO.type";
+import { type Product } from "@/type/Product.type";
+import { type PaginatedResponseDTO } from "@/type/product/dto/res/GetAllProductsDTO.type";
 import { useQuery } from "@tanstack/react-query";
 
 export type BriefProduct = Omit<Product, "stock"> & { hasStock: boolean };

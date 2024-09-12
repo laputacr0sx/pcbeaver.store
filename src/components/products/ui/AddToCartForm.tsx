@@ -11,7 +11,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { usePutItemToCart } from "@/hooks/cart/usePutItemToCart";
-import { useGetProductByPid } from "@/hooks/product/useGetProductByPid";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -37,11 +36,7 @@ function AddtoCartForm() {
 
   const { mutate: putItemToCart, isPending } = usePutItemToCart();
 
-  // const { data: product, isSuccess, isError, error } = useGetProductByPid(pid);
-
   async function onSubmit({ quantity }: z.infer<typeof addToCartFormSchema>) {
-    event?.preventDefault();
-
     putItemToCart({ pid, quantity });
     addToCartForm.reset();
   }

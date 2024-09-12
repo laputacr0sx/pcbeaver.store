@@ -1,4 +1,7 @@
-import { Brand, Category } from "@/type/product/dto/res/GetAllProductsDTO.type";
+import type {
+  Brand,
+  Category,
+} from "@/type/product/dto/res/GetAllProductsDTO.type";
 
 export type Product = {
   brand: Brand;
@@ -8,4 +11,5 @@ export type Product = {
   pid: number;
   price: number;
   stock: number;
-}
+};
+

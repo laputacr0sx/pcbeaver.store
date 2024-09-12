@@ -37,11 +37,11 @@ export function usePutItemToCart() {
       pid: number | string;
       quantity: number;
     }) => putItemToCart(user, pid, quantity),
-    onError(error, variables, context) {
+    onError(error) {
       toast.error(`Something went wrong!, ${error?.message}`);
     },
 
-    async onSuccess(data, variables, context) {
+    async onSuccess(data, variables) {
       console.table(data);
 
       await queryClient.invalidateQueries({ queryKey: ["cart"] });

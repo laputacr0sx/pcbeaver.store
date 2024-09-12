@@ -1,9 +1,9 @@
 "use client";
 
-import AddToCartForm from "@/components/products/[pid]/AddToCartForm";
-import BreadcrumbsNav from "@/components/products/[pid]/BreadcrumbsNav";
-import LoadingProduct from "@/components/products/[pid]/LoadingProduct";
-import ProductHasStockLabel from "@/components/products/[pid]/ProductHasStockLabel";
+import AddToCartForm from "@/components/products/ui/AddToCartForm";
+import BreadcrumbsNav from "@/components/products/ui/BreadcrumbsNav";
+import LoadingProduct from "@/components/products/ui/LoadingProduct";
+import ProductHasStockLabel from "@/components/products/ui/ProductHasStockLabel";
 import { useGetProductByPid } from "@/hooks/product/useGetProductByPid";
 import { cn } from "@/lib/utils";
 import Image from "next/image";

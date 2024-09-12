@@ -7,7 +7,7 @@ export function ShowStock({
   ...props
 }: { hasStock: boolean } & ComponentProps<"div">) {
   return hasStock ? (
-    <Label className={cn(props.className)}>有存貨於 貨倉</Label>
+    <Label className={cn(props.className)}>有存貨於貨倉</Label>
   ) : (
     <Label className={cn("text-slate-600", props.className)}>沒有存貨</Label>
   );

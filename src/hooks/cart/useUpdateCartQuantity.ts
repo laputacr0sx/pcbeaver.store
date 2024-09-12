@@ -1,5 +1,5 @@
 import { fetchCart } from "@/lib/fetcher";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { type User } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { type GetCartItemDTO } from "./useGetCartItems";
@@ -25,7 +25,6 @@ async function updateCartQuantity(
 
 function useUpdateCartQuantity() {
   const [user] = useAuthState(auth);
-  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: ({

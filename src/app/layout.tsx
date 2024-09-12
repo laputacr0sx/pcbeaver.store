@@ -3,8 +3,6 @@ import "@/styles/globals.css";
 import { type Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 
-import LandingPageFooter from "@/components/LandingPage/layout/Footer";
-import HeroHeader from "@/components/LandingPage/layout/HeroHeader";
 import { cn } from "@/lib/utils";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
@@ -56,10 +54,8 @@ export default function RootLayout({
       >
         <ReactQueryClientProvider>
           <Toaster position="top-right" />
-          {/* <HeroHeader /> */}
           <PageHeader />
           {children}
-          {/* <LandingPageFooter /> */}
           <PageFooter />
 
           <ReactQueryDevtools />
