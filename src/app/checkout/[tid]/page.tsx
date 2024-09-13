@@ -24,12 +24,14 @@ import Link                          from "next/link";
 import { useParams }                 from "next/navigation";
 import { type FieldErrors, useForm } from "react-hook-form";
 import { z }                         from "zod";
+import { PrepareTransactionDTO }     from "@/type/transaction/dto/res/PrepareTransactionDTO.type";
+import { Divider }                   from "@/components/tailwindui/divider";
+import toast                         from "react-hot-toast";
 
 export default function CheckoutPage() {
   const { tid } = useParams<{ tid: string }>();
   const { data: transactionData } = useGetTransactionByTid({ tid });
 
-  console.log(transactionData);
 
   return (
     <>
@@ -173,7 +175,7 @@ export default function CheckoutPage() {
         </section>
 
         {transactionData && (
-            <PaymentFormComponent tid={transactionData.tid}/>
+          <PaymentFormComponent transaction={transactionData}/>
         )}
       </main>
     </>
@@ -181,14 +183,22 @@ export default function CheckoutPage() {
 }
 
 const paymentFormSchema = z.object({
-  emailAddress  : z.string()
+  emailAddress  : z.string({
+    required_error: "Email address is required",
+  })
     .email("Invalid email address"),
-  nameOnCard    : z.string()
+  nameOnCard    : z.string({
+    required_error: "Name is required",
+  })
     .min(1, "Name on card is required"),
-  cardNumber    : z.string()
+  cardNumber    : z.string({
+    required_error: "Card number is required",
+  })
     .regex(/^\d{16}$/, "Card number must be 16 digits"),
   expirationDate: z
-    .string()
+    .string({
+      required_error: "Expiration date is required",
+    })
     .regex(
       /^(0[1-9]|1[0-2])\/?([0-9]{2})$/,
       "Expiration date must be in MM/YY format",
@@ -209,34 +219,66 @@ const paymentFormSchema = z.object({
         message: "Expiration date must be in the future",
       },
     ),
-  cvc           : z.string()
+  cvc           : z.string({
+    required_error: "CVC is required"
+  })
     .regex(/^\d{3,4}$/, "CVC must be 3 or 4 digits"),
-  address       : z.string()
+  address       : z.string({
+    required_error: "Address is required"
+  })
     .min(1, "Address is required"),
-  city          : z.string()
+  city          : z.string({
+    required_error: "City is required"
+  })
     .min(1, "City is required"),
-  region        : z.string()
-    .min(1, "State/Province is required"),
-  postalCode    : z.string()
-    .min(1, "Postal code is required"),
+  region        : z.string({
+    required_error: "State/Province is required"
+  }),
+  postalCode    : z.string({
+    required_error: "Postal code is required"
+  })
+    .min(1, "Invalid postal code"),
 });
 
 type PaymentForm = z.infer<typeof paymentFormSchema>;
 
-function PaymentFormComponent({ tid }: { tid: number }) {
+function PaymentFormComponent({ transaction }: { transaction: PrepareTransactionDTO }) {
   const paymentForm = useForm<PaymentForm>({
     resolver: zodResolver(paymentFormSchema),
+    defaultValues: {
+      emailAddress: "",
+      nameOnCard: "",
+      cardNumber: "",
+      expirationDate: "",
+      cvc: "",
+      address: "",
+      city: "",
+      region: "",
+      postalCode: "",
+    }
   });
   const { mutate: payTransaction } = usePayTransaction();
 
   async function onSubmit(values: PaymentForm) {
     console.table(values);
-    payTransaction({ tid });
+    payTransaction({ tid: transaction.tid });
   }
 
   function invalidSubmit(err: FieldErrors<PaymentForm>) {
     console.error(err);
     console.error("Invalid form submission");
+  }
+
+  function demoFillIn() {
+    paymentForm.setValue("cvc", "1111");
+    paymentForm.setValue("emailAddress", "test@test.com");
+    paymentForm.setValue("nameOnCard", "Test User");
+    paymentForm.setValue("cardNumber", "4242424242424242");
+    paymentForm.setValue("expirationDate", "12/34");
+    paymentForm.setValue("address", "123 Main St");
+    paymentForm.setValue("city", "Any Town");
+    paymentForm.setValue("region", "CA");
+    paymentForm.setValue("postalCode", "12345");
   }
 
   return (
@@ -461,16 +503,44 @@ function PaymentFormComponent({ tid }: { tid: number }) {
               type="submit"
               className="mt-6 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              Pay ${0}
+              Pay $ {transaction.total}
             </Button>
 
-            <p className="mt-6 flex justify-center text-sm font-medium text-gray-500">
-              <LockClosedIcon
-                aria-hidden="true"
-                className="mr-1.5 h-5 w-5 text-gray-400"
-              />
-              Payment details stored in plain text
-            </p>
+            <Divider className="my-2"/>
+
+            <section className="flex justify-between items-center">
+              <Button
+                color={"yellow"}
+                onClick={
+                  () => {
+                    paymentForm.setValue("cvc", "1111");
+                    paymentForm.setValue("emailAddress", "test@test.com");
+                    paymentForm.setValue("nameOnCard", "Test User");
+                    paymentForm.setValue("cardNumber", "4242424242424242");
+                    paymentForm.setValue("expirationDate", "12/34");
+                    paymentForm.setValue("address", "123 Main St");
+                    paymentForm.setValue("city", "Any Town");
+                    paymentForm.setValue("region", "CA");
+                    paymentForm.setValue("postalCode", "12345");
+
+                    toast.success("Demo payment filled in successfully!");
+                  }
+                }
+                className="mt-6 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                Demo Fill In
+              </Button>
+
+              <Button
+                color="rose"
+                className="mt-6 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                onClick={() => {
+                  paymentForm.reset();
+
+                  toast.success("Form Reset")
+                }}>
+                Reset
+              </Button>
+            </section>
           </form>
         </Form>
       </div>

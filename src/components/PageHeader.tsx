@@ -389,7 +389,7 @@ export default function PageHeader() {
                         Search
                       </a>
 
-                      <div className="flex items-center lg:ml-8">
+                      <div className="flex gap-8 items-center lg:ml-8">
                         <SignInButton/>
                         <ShoppingCart/>
                       </div>

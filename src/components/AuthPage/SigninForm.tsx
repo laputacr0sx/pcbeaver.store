@@ -1,24 +1,17 @@
 "use client";
 
-import { Button }      from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-}                      from "@/components/ui/form";
-import { Input }       from "@/components/ui/input";
-import { firebaseApp } from "@/lib/authService";
-import { zodResolver }                   from "@hookform/resolvers/zod";
-import { getAuth }                       from "firebase/auth";
-import { useRouter }                     from "next/navigation";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { useForm }                       from "react-hook-form";
-import { z }                             from "zod";
-import { Divider }                       from "../tailwindui/divider";
-import GoogleSignInButton                from "./GoogleSignInButton";
+import { Button }                                                          from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form";
+import { Input }                                                           from "@/components/ui/input";
+import { firebaseApp }                                                     from "@/lib/authService";
+import { zodResolver }                                                     from "@hookform/resolvers/zod";
+import { getAuth }                                                         from "firebase/auth";
+import { useRouter }                                                       from "next/navigation";
+import { useSignInWithEmailAndPassword }                                   from "react-firebase-hooks/auth";
+import { useForm }                                                         from "react-hook-form";
+import { z }                                                               from "zod";
+import { Divider }                                                         from "../tailwindui/divider";
+import GoogleSignInButton                                                  from "./GoogleSignInButton";
 
 export const auth = getAuth(firebaseApp);
 
