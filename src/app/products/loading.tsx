@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
 import { Skeleton } from "@/components/ui/skeleton";
-import React from "react";
+import React        from "react";
 
 function LoadingProducts() {
   return (
@@ -14,11 +14,11 @@ function LoadingProducts() {
               className="group relative border-b border-r border-gray-200 p-4 sm:p-6"
             >
               <Skeleton className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75">
-                <Skeleton className="h-full w-full object-cover object-center" />
+                <Skeleton className="h-full w-full object-cover object-center"/>
               </Skeleton>
               <Skeleton className="pb-4 pt-10 text-center">
-                <Skeleton className="mt-3 flex flex-col items-center" />
-                <Skeleton className="mt-4 text-base font-medium text-gray-900" />
+                <Skeleton className="mt-3 flex flex-col items-center"/>
+                <Skeleton className="mt-4 text-base font-medium text-gray-900"/>
               </Skeleton>
             </Skeleton>
           ))}

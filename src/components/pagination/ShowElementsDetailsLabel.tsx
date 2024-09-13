@@ -9,9 +9,12 @@ export function sliceInfo(
 ) {
   const beginOfSlice = pageNo * pageSize + 1;
   const endOfSlice =
-    beginOfSlice + 20 > totalElements ? totalElements : beginOfSlice + 20;
+          beginOfSlice + 20 > totalElements ? totalElements : beginOfSlice + 20;
 
-  return { beginOfSlice, endOfSlice };
+  return {
+    beginOfSlice,
+    endOfSlice
+  };
 }
 
 type ShowElementsDetailsProps = ComponentProps<"div"> & {
@@ -21,10 +24,10 @@ type ShowElementsDetailsProps = ComponentProps<"div"> & {
 };
 
 function ShowElementsDetailsLabel({
-  beginOfSlice,
-  endOfSlice,
-  totalElements,
-}: ShowElementsDetailsProps) {
+                                    beginOfSlice,
+                                    endOfSlice,
+                                    totalElements,
+                                  }: ShowElementsDetailsProps) {
   return (
     <div>
       <p className="text-sm text-gray-700">

@@ -1,9 +1,9 @@
-import * as Headless from "@headlessui/react";
-import clsx from "clsx";
+import * as Headless         from "@headlessui/react";
+import clsx                  from "clsx";
 import React, { forwardRef } from "react";
-import { TouchTarget } from "./button";
-import { Link } from "./link";
-import Image from "next/image";
+import { TouchTarget }       from "./button";
+import { Link }              from "./link";
+import Image                 from "next/image";
 
 type AvatarProps = {
   src?: string | null;
@@ -14,13 +14,13 @@ type AvatarProps = {
 };
 
 export function Avatar({
-  src = null,
-  square = false,
-  initials,
-  alt = "",
-  className,
-  ...props
-}: AvatarProps & React.ComponentPropsWithoutRef<"span">) {
+                         src = null,
+                         square = false,
+                         initials,
+                         alt = "",
+                         className,
+                         ...props
+                       }: AvatarProps & React.ComponentPropsWithoutRef<"span">) {
   return (
     <span
       data-slot="avatar"
@@ -78,10 +78,10 @@ export const AvatarButton = forwardRef(function AvatarButton(
     className,
     ...props
   }: AvatarProps &
-    (
-      | Omit<Headless.ButtonProps, "as" | "className">
-      | Omit<React.ComponentPropsWithoutRef<typeof Link>, "className">
-    ),
+     (
+       | Omit<Headless.ButtonProps, "as" | "className">
+       | Omit<React.ComponentPropsWithoutRef<typeof Link>, "className">
+       ),
   ref: React.ForwardedRef<HTMLElement>,
 ) {
   const classes = clsx(
@@ -97,13 +97,13 @@ export const AvatarButton = forwardRef(function AvatarButton(
       ref={ref as React.ForwardedRef<HTMLAnchorElement>}
     >
       <TouchTarget>
-        <Avatar src={src} square={square} initials={initials} alt={alt} />
+        <Avatar src={src} square={square} initials={initials} alt={alt}/>
       </TouchTarget>
     </Link>
   ) : (
     <Headless.Button {...props} className={classes} ref={ref}>
       <TouchTarget>
-        <Avatar src={src} square={square} initials={initials} alt={alt} />
+        <Avatar src={src} square={square} initials={initials} alt={alt}/>
       </TouchTarget>
     </Headless.Button>
   );

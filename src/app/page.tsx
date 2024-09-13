@@ -1,32 +1,32 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import Link  from "next/link";
 
 const categories = [
   {
-    name: "CPUs",
-    href: "/CPU",
+    name    : "CPUs",
+    href    : "/categories/CPU",
     imageSrc: "/category/CPU.webp",
   },
   {
-    name: "GPUs",
-    href: "/GPU",
+    name    : "GPUs",
+    href    : "/categories/GPU",
     imageSrc: "/category/GPU.webp",
   },
   {
-    name: "Motherboards",
-    href: "/Motherboard",
+    name    : "Motherboards",
+    href    : "/categories/Motherboard",
     imageSrc: "/category/Motherboard.jpg",
   },
   {
-    name: "RAMs",
-    href: "/RAM",
+    name    : "RAMs",
+    href    : "/categories/RAM",
     imageSrc: "/category/RAM.jpg",
   },
   {
-    name: "PSU",
-    href: "/PSU",
+    name    : "PSU",
+    href    : "/categories/PSU",
     imageSrc: "/category/PSU.webp",
   },
 ];
@@ -85,7 +85,7 @@ export default function HomePage() {
               Shop by Category
             </h2>
             <Link
-              href="#"
+              href="/"
               className="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block"
             >
               Browse all categories
@@ -96,7 +96,8 @@ export default function HomePage() {
           <div className="mt-4 flow-root">
             <div className="-my-2">
               <div className="relative box-content h-80 overflow-x-auto py-2 xl:overflow-visible">
-                <div className="absolute flex space-x-8 px-4 sm:px-6 lg:px-8 xl:relative xl:grid xl:grid-cols-5 xl:gap-x-8 xl:space-x-0 xl:px-0">
+                <div
+                  className="absolute flex space-x-8 px-4 sm:px-6 lg:px-8 xl:relative xl:grid xl:grid-cols-5 xl:gap-x-8 xl:space-x-0 xl:px-0">
                   {categories.map((category) => (
                     <Link
                       key={category.name}

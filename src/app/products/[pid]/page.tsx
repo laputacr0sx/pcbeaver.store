@@ -1,16 +1,19 @@
 "use client";
 
-import AddToCartForm from "@/components/products/ui/AddToCartForm";
-import BreadcrumbsNav from "@/components/products/ui/BreadcrumbsNav";
-import LoadingProduct from "@/components/products/ui/LoadingProduct";
-import ProductHasStockLabel from "@/components/products/ui/ProductHasStockLabel";
+import AddToCartForm          from "@/components/products/ui/AddToCartForm";
+import BreadcrumbsNav         from "@/components/products/ui/BreadcrumbsNav";
+import LoadingProduct         from "@/components/products/ui/LoadingProduct";
+import ProductHasStockLabel   from "@/components/products/ui/ProductHasStockLabel";
 import { useGetProductByPid } from "@/hooks/product/useGetProductByPid";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { useParams } from "next/navigation";
+import { cn }                  from "@/lib/utils";
+import Image                   from "next/image";
+import { useParams }           from "next/navigation";
 import { type ComponentProps } from "react";
 
-function PriceTag({ children, className }: ComponentProps<"div">) {
+function PriceTag({
+                    children,
+                    className
+                  }: ComponentProps<"div">) {
   return (
     <div className="flex items-start font-sans">
       <p className={cn("px-2 py-1", className)}>
@@ -22,21 +25,28 @@ function PriceTag({ children, className }: ComponentProps<"div">) {
     </div>
   );
 }
+
 export default function ProductDetailPage() {
   const { pid } = useParams<{ pid: string }>();
 
-  const { data: product, isSuccess, isError, error } = useGetProductByPid(pid);
+  const {
+          data: product,
+          isSuccess,
+          isError,
+          error
+        } = useGetProductByPid(pid);
 
   if (isError) return <div>Error: {error.message}</div>;
 
-  if (!isSuccess) return <LoadingProduct />;
+  if (!isSuccess) return <>No Products</>;
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+      <div
+        className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
         {/* Product details */}
         <div className="lg:max-w-lg lg:self-end">
-          <BreadcrumbsNav product={product} />
+          <BreadcrumbsNav product={product}/>
           <div className="mt-4">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               {product.name}
@@ -51,7 +61,7 @@ export default function ProductDetailPage() {
             <PriceTag className="font-sans">
               {product.price.toLocaleString()}
             </PriceTag>
-            <ProductHasStockLabel stock={product.stock} />
+            <ProductHasStockLabel stock={product.stock}/>
           </section>
         </div>
 
@@ -74,7 +84,7 @@ export default function ProductDetailPage() {
             <h2 id="options-heading" className="sr-only">
               Add To Cart
             </h2>
-            <AddToCartForm />
+            <AddToCartForm/>
           </section>
         </div>
       </div>

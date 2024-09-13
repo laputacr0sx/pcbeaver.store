@@ -1,11 +1,11 @@
 import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
+import { cn }    from "@/lib/utils";
 import { type ComponentProps } from "react";
 
 export function ShowStock({
-  hasStock,
-  ...props
-}: { hasStock: boolean } & ComponentProps<"div">) {
+                            hasStock,
+                            ...props
+                          }: { hasStock: boolean } & ComponentProps<"div">) {
   return hasStock ? (
     <Label className={cn(props.className)}>有存貨於貨倉</Label>
   ) : (
@@ -13,7 +13,10 @@ export function ShowStock({
   );
 }
 
-export function PriceTag({ children, className }: ComponentProps<"div">) {
+export function PriceTag({
+                           children,
+                           className
+                         }: ComponentProps<"div">) {
   return (
     <div className="flex items-start font-sans">
       <p className={cn("px-2 py-1", className)}>

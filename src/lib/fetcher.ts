@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import axios from "axios";
+import axios   from "axios";
 
 export const fetchProduct = axios.create({
   baseURL: `${env.NEXT_PUBLIC_DATABASE_URL}/public/product`,

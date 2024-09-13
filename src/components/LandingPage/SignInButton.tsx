@@ -1,10 +1,10 @@
 "use client";
 
-import { firebaseApp } from "@/lib/authService";
+import { firebaseApp }      from "@/lib/authService";
 import { getAuth, signOut } from "firebase/auth";
-import Link from "next/link";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { Skeleton } from "../ui/skeleton";
+import Link                 from "next/link";
+import { useAuthState }     from "react-firebase-hooks/auth";
+import { Skeleton }         from "../ui/skeleton";
 
 const auth = getAuth(firebaseApp);
 
@@ -14,7 +14,7 @@ function AuthenticationButton() {
   if (loading) {
     return (
       <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-        <Skeleton className="h-10 w-10 rounded-full" />
+        <Skeleton className="h-10 w-10 rounded-full"/>
       </div>
     );
   }
@@ -29,7 +29,8 @@ function AuthenticationButton() {
 
   if (user) {
     const emailName =
-      user.email?.split("@")[0]?.substring(0, 2).toUpperCase() ?? "GG";
+            user.email?.split("@")[0]?.substring(0, 2)
+              .toUpperCase() ?? "GG";
 
     return (
       <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
@@ -46,7 +47,7 @@ function AuthenticationButton() {
             </span>
           </span>
         </Link>
-        <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
+        <span aria-hidden="true" className="h-6 w-px bg-gray-200"/>
       </div>
     );
   }
@@ -62,7 +63,7 @@ function AuthenticationButton() {
           <span className="font-medium leading-none text-white">😀</span>
         </span>
       </Link>
-      <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
+      <span aria-hidden="true" className="h-6 w-px bg-gray-200"/>
     </div>
   );
 }

@@ -1,21 +1,21 @@
 "use client";
 
-import LoadingProducts from "@/app/products/loading";
+import LoadingProducts          from "@/app/products/loading";
 import { ShowPrice, ShowStock } from "@/components/LandingPage/ProductItem";
-import PaginationBar from "@/components/pagination/PaginationBar";
-import { Separator } from "@/components/ui/separator";
-import type { Brand } from "@/type/product/dto/res/GetAllProductsDTO.type";
+import PaginationBar            from "@/components/pagination/PaginationBar";
+import { Separator }            from "@/components/ui/separator";
+import type { Brand }           from "@/type/product/dto/res/GetAllProductsDTO.type";
 
-import Image from "next/image";
-import Link from "next/link";
-import { useParams } from "next/navigation";
+import Image                  from "next/image";
+import Link                   from "next/link";
+import { useParams }          from "next/navigation";
 import { Suspense, useState } from "react";
-import useGetProductsByBrand from "@/hooks/product/useGetProductsByBrand";
+import useGetProductsByBrand  from "@/hooks/product/useGetProductsByBrand";
 
 function BrandProducts() {
   return (
-    <Suspense fallback={<LoadingProducts />}>
-      <BrandProductsPage />
+    <Suspense fallback={<LoadingProducts/>}>
+      <BrandProductsPage/>
     </Suspense>
   );
 }
@@ -26,10 +26,10 @@ function BrandProductsPage() {
   const [page, setPage] = useState<number>(0);
 
   const {
-    data: allProducts,
-    isLoading,
-    isSuccess,
-  } = useGetProductsByBrand(brand, page);
+          data: allProducts,
+          isLoading,
+          isSuccess,
+        } = useGetProductsByBrand(brand, page);
 
   if (isLoading)
     return (
@@ -41,7 +41,7 @@ function BrandProductsPage() {
               return <div key={i}>hello</div>;
             })}
           </div>
-          <Separator className="h-4 w-40" />
+          <Separator className="h-4 w-40"/>
         </div>
       </div>
     );
@@ -72,12 +72,12 @@ function BrandProductsPage() {
               <div className="pb-4 pt-10 text-center">
                 <h3 className="text-sm font-medium text-gray-900">
                   <Link href={`/products/${product.pid}`}>
-                    <span aria-hidden="true" className="absolute inset-0" />
+                    <span aria-hidden="true" className="absolute inset-0"/>
                     {product.name}
                   </Link>
                 </h3>
-                <ShowPrice price={product.price} />
-                <ShowStock hasStock={product.hasStock} />
+                <ShowPrice price={product.price}/>
+                <ShowStock hasStock={product.hasStock}/>
               </div>
             </div>
           ))}

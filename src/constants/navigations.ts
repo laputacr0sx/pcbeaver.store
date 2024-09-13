@@ -1,8 +1,7 @@
-
 export const navigation = {
   categories: [
     {
-      name: "Categories",
+      name    : "Categories",
       featured: [
         {
           name: "New Arrivals",
@@ -23,7 +22,7 @@ export const navigation = {
       ],
     },
     {
-      name: "Brand",
+      name    : "Brand",
       featured: [
         {
           name: "New Arrivals",

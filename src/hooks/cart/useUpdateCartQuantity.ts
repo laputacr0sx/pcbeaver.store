@@ -1,9 +1,9 @@
-import { fetchCart } from "@/lib/fetcher";
-import { useMutation } from "@tanstack/react-query";
-import { type User } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { fetchCart }           from "@/lib/fetcher";
+import { useMutation }         from "@tanstack/react-query";
+import { type User }           from "firebase/auth";
+import { useAuthState }        from "react-firebase-hooks/auth";
 import { type GetCartItemDTO } from "./useGetCartItems";
-import { auth } from "./useRemoveCartItem";
+import { auth }                from "./useRemoveCartItem";
 
 async function updateCartQuantity(
   user: User | null | undefined,
@@ -28,9 +28,9 @@ function useUpdateCartQuantity() {
 
   return useMutation({
     mutationFn: ({
-      pid,
-      quantity,
-    }: {
+                   pid,
+                   quantity,
+                 }: {
       pid: number | string;
       quantity: number;
     }) => updateCartQuantity(user, pid, quantity),

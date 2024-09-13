@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/tailwindui/button";
-import { Input } from "@/components/tailwindui/input";
+import { Button }             from "@/components/tailwindui/button";
+import { Input }              from "@/components/tailwindui/input";
 import {
   Form,
   FormControl,
@@ -9,21 +9,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+}                             from "@/components/ui/form";
 import useGetTransactionByTid from "@/hooks/transaction/useGetTransactionByTid";
-import usePayTransaction from "@/hooks/transaction/usePayTransaction";
+import usePayTransaction             from "@/hooks/transaction/usePayTransaction";
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
-} from "@headlessui/react";
-import { LockClosedIcon } from "@heroicons/react/20/solid";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
-import Link from "next/link";
-import { useParams } from "next/navigation";
+}                                    from "@headlessui/react";
+import { LockClosedIcon }            from "@heroicons/react/20/solid";
+import { zodResolver }               from "@hookform/resolvers/zod";
+import Image                         from "next/image";
+import Link                          from "next/link";
+import { useParams }                 from "next/navigation";
 import { type FieldErrors, useForm } from "react-hook-form";
-import { z } from "zod";
+import { z }                         from "zod";
 
 export default function CheckoutPage() {
   const { tid } = useParams<{ tid: string }>();
@@ -104,7 +104,8 @@ export default function CheckoutPage() {
               </ul>
             </DisclosurePanel>
 
-            <p className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-gray-900">
+            <p
+              className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-gray-900">
               <span className="text-base">Total</span>
               <span className="text-base">{transactionData?.total}</span>
             </p>
@@ -380,7 +381,7 @@ export default function CheckoutPage() {
         </section>
         {transactionData && (
           <section>
-            <PaymentFormComponent tid={transactionData.tid} />
+            <PaymentFormComponent tid={transactionData.tid}/>
           </section>
         )}
       </main>
@@ -389,9 +390,12 @@ export default function CheckoutPage() {
 }
 
 const paymentFormSchema = z.object({
-  emailAddress: z.string().email("Invalid email address"),
-  nameOnCard: z.string().min(1, "Name on card is required"),
-  cardNumber: z.string().regex(/^\d{16}$/, "Card number must be 16 digits"),
+  emailAddress  : z.string()
+    .email("Invalid email address"),
+  nameOnCard    : z.string()
+    .min(1, "Name on card is required"),
+  cardNumber    : z.string()
+    .regex(/^\d{16}$/, "Card number must be 16 digits"),
   expirationDate: z
     .string()
     .regex(
@@ -400,7 +404,8 @@ const paymentFormSchema = z.object({
     )
     .refine(
       (date) => {
-        const [month, year] = date.split("/").map(Number);
+        const [month, year] = date.split("/")
+          .map(Number);
         const currentYear = new Date().getFullYear() % 100; // Get last two digits of the current year
         const currentMonth = new Date().getMonth() + 1; // Months are 0-indexed
         // Check if the year is in the future or if the year is the current year and the month is in the future
@@ -413,11 +418,16 @@ const paymentFormSchema = z.object({
         message: "Expiration date must be in the future",
       },
     ),
-  cvc: z.string().regex(/^\d{3,4}$/, "CVC must be 3 or 4 digits"),
-  address: z.string().min(1, "Address is required"),
-  city: z.string().min(1, "City is required"),
-  region: z.string().min(1, "State/Province is required"),
-  postalCode: z.string().min(1, "Postal code is required"),
+  cvc           : z.string()
+    .regex(/^\d{3,4}$/, "CVC must be 3 or 4 digits"),
+  address       : z.string()
+    .min(1, "Address is required"),
+  city          : z.string()
+    .min(1, "City is required"),
+  region        : z.string()
+    .min(1, "State/Province is required"),
+  postalCode    : z.string()
+    .min(1, "Postal code is required"),
 });
 
 type PaymentForm = z.infer<typeof paymentFormSchema>;
@@ -462,7 +472,7 @@ function PaymentFormComponent({ tid }: { tid: number }) {
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage/>
                 </FormItem>
               )}
             />
@@ -485,7 +495,7 @@ function PaymentFormComponent({ tid }: { tid: number }) {
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage/>
                 </FormItem>
               )}
             />
@@ -508,7 +518,7 @@ function PaymentFormComponent({ tid }: { tid: number }) {
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage/>
                 </FormItem>
               )}
             />
@@ -531,7 +541,7 @@ function PaymentFormComponent({ tid }: { tid: number }) {
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage/>
                 </FormItem>
               )}
             />
@@ -554,7 +564,7 @@ function PaymentFormComponent({ tid }: { tid: number }) {
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage/>
                 </FormItem>
               )}
             />
@@ -577,7 +587,7 @@ function PaymentFormComponent({ tid }: { tid: number }) {
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage/>
                 </FormItem>
               )}
             />
@@ -600,7 +610,7 @@ function PaymentFormComponent({ tid }: { tid: number }) {
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage/>
                 </FormItem>
               )}
             />
@@ -623,7 +633,7 @@ function PaymentFormComponent({ tid }: { tid: number }) {
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage/>
                 </FormItem>
               )}
             />
@@ -644,7 +654,7 @@ function PaymentFormComponent({ tid }: { tid: number }) {
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage/>
                 </FormItem>
               )}
             />

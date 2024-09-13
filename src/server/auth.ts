@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { env } from "@/env";
+import { env }                         from "@/env";
 import { handleSignInWithCredentials } from "@/lib/authService";
 import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
-} from "next-auth";
+}                                      from "next-auth";
 
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider      from "next-auth/providers/google";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -20,10 +20,10 @@ import GoogleProvider from "next-auth/providers/google";
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
-      id: string;
-      // ...other properties
-      // role: UserRole;
-    } & DefaultSession["user"];
+            id: string;
+            // ...other properties
+            // role: UserRole;
+          } & DefaultSession["user"];
   }
 
   // interface User {
@@ -33,28 +33,40 @@ declare module "next-auth" {
 }
 
 export const authOptions: NextAuthOptions = {
-  pages: {
+  pages    : {
     signIn: "/signin",
   },
   callbacks: {
-    signIn: ({ user, account, profile, email, credentials }) => {
+    signIn  : (ctx) => {
       return true;
     },
-    redirect: ({ url, baseUrl }) => {
+    redirect: ({
+                 url,
+                 baseUrl
+               }) => {
       // Allows relative callback URLs
       if (url.startsWith("/")) return `${baseUrl}${url}`;
       // Allows callback URLs on the same origin
       else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },
-    session: ({ session, token }) => ({
+    session : ({
+                 session,
+                 token
+               }) => ({
       ...session,
       user: {
         ...session.user,
         id: token.sub,
       },
     }),
-    jwt: ({ token, user, account, profile, isNewUser }) => {
+    jwt     : ({
+                 token,
+                 user,
+                 account,
+                 profile,
+                 isNewUser
+               }) => {
       if (account) {
         token.accessToken = account.access_token;
         // token.id = profile.id;
@@ -64,26 +76,29 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      clientId     : env.GOOGLE_CLIENT_ID,
+      clientSecret : env.GOOGLE_CLIENT_SECRET,
       authorization: {
         params: {
-          prompt: "consent",
-          access_type: "offline",
+          prompt       : "consent",
+          access_type  : "offline",
           response_type: "code",
         },
       },
     }),
     CredentialsProvider({
-      id: "email_login",
-      name: "Credentials",
+      id         : "email_login",
+      name       : "Credentials",
       credentials: {
-        email: {
-          label: "E-mail",
-          type: "email",
+        email   : {
+          label      : "E-mail",
+          type       : "email",
           placeholder: "hello@world.com",
         },
-        password: { label: "Password", type: "password" },
+        password: {
+          label: "Password",
+          type : "password"
+        },
       },
       async authorize(credentials, _req) {
         if (!credentials?.email || !credentials?.password) {
@@ -96,7 +111,7 @@ export const authOptions: NextAuthOptions = {
           });
 
           return {
-            id: firebaseUser.user.uid,
+            id   : firebaseUser.user.uid,
             email: firebaseUser.user.email,
           };
         } catch (e) {

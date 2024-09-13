@@ -11,7 +11,11 @@ import { ShowPrice, ShowStock } from "./ProductItem";
 export default function LandingPage() {
   const [page, setPage] = useState<number>(0);
 
-  const { data: allProducts, isLoading, isSuccess } = useGetAllProducts(page);
+  const {
+          data: allProducts,
+          isLoading,
+          isSuccess
+        } = useGetAllProducts(page);
 
   if (isLoading)
     return (
@@ -23,7 +27,7 @@ export default function LandingPage() {
               return <div key={i}>hello</div>;
             })}
           </div>
-          <Separator className="h-4 w-40" />
+          <Separator className="h-4 w-40"/>
         </div>
       </div>
     );
@@ -52,12 +56,12 @@ export default function LandingPage() {
               <div className="pb-4 pt-10 text-center">
                 <h3 className="text-sm font-medium text-gray-900">
                   <Link href={`/products/${product.pid}`}>
-                    <span aria-hidden="true" className="absolute inset-0" />
+                    <span aria-hidden="true" className="absolute inset-0"/>
                     {product.name}
                   </Link>
                 </h3>
-                <ShowPrice price={product.price} />
-                <ShowStock hasStock={product.hasStock} />
+                <ShowPrice price={product.price}/>
+                <ShowStock hasStock={product.hasStock}/>
               </div>
             </div>
           ))}

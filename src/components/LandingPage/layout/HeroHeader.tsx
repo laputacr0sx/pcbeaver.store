@@ -1,20 +1,20 @@
 "use client";
 
-import { HERO_NAV } from "@/lib/navigation";
+import { HERO_NAV }  from "@/lib/navigation";
 import {
   Popover,
   PopoverButton,
   PopoverGroup,
   PopoverPanel,
-} from "@headlessui/react";
+}                    from "@headlessui/react";
 import { Bars3Icon } from "@heroicons/react/16/solid";
-import Image from "next/image";
-import Link from "next/link";
+import Image         from "next/image";
+import Link          from "next/link";
 
-import { useState } from "react";
-import ShoppingCart from "../Cart";
+import { useState }         from "react";
+import ShoppingCart         from "../Cart";
 import AuthenticationButton from "@/components/LandingPage/SignInButton";
-import SignInButton from "@/components/LandingPage/SignInButton";
+import SignInButton         from "@/components/LandingPage/SignInButton";
 
 function HeroHeader() {
   const [open, setOpen] = useState(false);
@@ -33,9 +33,9 @@ function HeroHeader() {
               onClick={() => setOpen(true)}
               className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
             >
-              <span className="absolute -inset-0.5" />
+              <span className="absolute -inset-0.5"/>
               <span className="sr-only">Open menu</span>
-              <Bars3Icon aria-hidden="true" className="h-6 w-6" />
+              <Bars3Icon aria-hidden="true" className="h-6 w-6"/>
             </button>
 
             {/* Logo */}
@@ -57,7 +57,8 @@ function HeroHeader() {
                 {HERO_NAV.categories.map((category) => (
                   <Popover key={category.name} className="flex">
                     <div className="relative flex">
-                      <PopoverButton className="relative z-20 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-[open]:border-indigo-600 data-[open]:text-indigo-600">
+                      <PopoverButton
+                        className="relative z-20 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-[open]:border-indigo-600 data-[open]:text-indigo-600">
                         {category.name}
                       </PopoverButton>
                     </div>
@@ -76,7 +77,8 @@ function HeroHeader() {
                         aria-hidden="true"
                         className="absolute inset-0 top-0 mx-auto h-px max-w-7xl px-8"
                       >
-                        <div className="h-px w-full bg-transparent transition-colors duration-200 ease-out group-data-[open]:bg-gray-200" />
+                        <div
+                          className="h-px w-full bg-transparent transition-colors duration-200 ease-out group-data-[open]:bg-gray-200"/>
                       </div>
 
                       <div className="relative">
@@ -88,7 +90,8 @@ function HeroHeader() {
                                   key={item.name}
                                   className="group relative text-base sm:text-sm"
                                 >
-                                  <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
+                                  <div
+                                    className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                                     <img
                                       alt={item.imageAlt}
                                       src={item.imageSrc}
@@ -168,10 +171,10 @@ function HeroHeader() {
               {/* </div> */}
 
               {/* Authentication Buttons  */}
-              <SignInButton />
+              <SignInButton/>
 
               {/* Cart */}
-              <ShoppingCart />
+              <ShoppingCart/>
             </div>
           </div>
         </div>

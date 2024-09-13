@@ -1,12 +1,12 @@
 "use client";
 
-import ShoppingCart from "@/components/LandingPage/Cart";
-import SignInButton from "@/components/LandingPage/SignInButton";
+import ShoppingCart                  from "@/components/LandingPage/Cart";
+import SignInButton                  from "@/components/LandingPage/SignInButton";
 import { fetchBrand, fetchCategory } from "@/lib/fetcher";
 import {
   type Brand,
   type Category,
-} from "@/type/product/dto/res/GetAllProductsDTO.type";
+}                                    from "@/type/product/dto/res/GetAllProductsDTO.type";
 import {
   Dialog,
   DialogBackdrop,
@@ -20,16 +20,16 @@ import {
   TabList,
   TabPanel,
   TabPanels,
-} from "@headlessui/react";
+}                                    from "@headlessui/react";
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
   XMarkIcon,
-} from "@heroicons/react/24/outline";
-import { useQueries } from "@tanstack/react-query";
-import Image from "next/image";
-import Link from "next/link";
-import { Fragment, useState } from "react";
+}                                    from "@heroicons/react/24/outline";
+import { useQueries }                from "@tanstack/react-query";
+import Image                         from "next/image";
+import Link                          from "next/link";
+import { Fragment, useState }        from "react";
 
 export default function PageHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -38,14 +38,14 @@ export default function PageHeader() {
     queries: [
       {
         queryKey: ["brands"],
-        queryFn: async () => {
+        queryFn : async () => {
           const { data } = await fetchBrand.get<Brand[]>("");
           return data;
         },
       },
       {
         queryKey: ["categories"],
-        queryFn: async () => {
+        queryFn : async () => {
           const { data } = await fetchCategory.get<Category[]>("");
           return data;
         },
@@ -77,7 +77,7 @@ export default function PageHeader() {
                 className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
               >
                 <span className="sr-only">Close menu</span>
-                <XMarkIcon aria-hidden="true" className="h-6 w-6" />
+                <XMarkIcon aria-hidden="true" className="h-6 w-6"/>
               </button>
             </div>
 
@@ -91,7 +91,8 @@ export default function PageHeader() {
                   >
                     <Link href={"/products"}>All</Link>
                   </Tab>
-                  <Tab className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-indigo-600 data-[selected]:text-indigo-600">
+                  <Tab
+                    className="flex-1 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-gray-900 data-[selected]:border-indigo-600 data-[selected]:text-indigo-600">
                     Categories
                   </Tab>
                   <Tab
@@ -222,14 +223,16 @@ export default function PageHeader() {
                         <div className="flex h-full justify-center space-x-8">
                           <Popover key="all" className="flex">
                             <div className="relative flex">
-                              <PopoverButton className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
+                              <PopoverButton
+                                className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
                                 <Link href={"/products"}>All Products</Link>
                               </PopoverButton>
                             </div>
                           </Popover>
                           <Popover key="Brands" className="flex">
                             <div className="relative flex">
-                              <PopoverButton className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
+                              <PopoverButton
+                                className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
                                 Brands
                                 <span
                                   aria-hidden="true"
@@ -251,23 +254,24 @@ export default function PageHeader() {
                               <div className="relative bg-white">
                                 <div className="mx-auto max-w-7xl px-1 sm:px-2 lg:px-4">
                                   <div className="grid grid-cols-4 gap-x-2 gap-y-4 py-4">
-                                    {brands?.slice(0, 30).map((brand) => (
-                                      <div
-                                        key={brand}
-                                        className="group relative"
-                                      >
-                                        <Link
-                                          href={`/brands/${brand}`}
-                                          className="mt-1 block font-medium text-gray-900"
+                                    {brands?.slice(0, 30)
+                                      .map((brand) => (
+                                        <div
+                                          key={brand}
+                                          className="group relative"
                                         >
+                                          <Link
+                                            href={`/brands/${brand}`}
+                                            className="mt-1 block font-medium text-gray-900"
+                                          >
                                           <span
                                             aria-hidden="true"
                                             className="absolute inset-0 z-10"
                                           />
-                                          {brand}
-                                        </Link>
-                                      </div>
-                                    ))}
+                                            {brand}
+                                          </Link>
+                                        </div>
+                                      ))}
                                     <div
                                       key={"extra..."}
                                       className="group relative"
@@ -285,7 +289,8 @@ export default function PageHeader() {
                           </Popover>
                           <Popover key="Categories" className="flex">
                             <div className="relative flex">
-                              <PopoverButton className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
+                              <PopoverButton
+                                className="group relative z-10 flex items-center justify-center text-sm font-medium text-white transition-colors duration-200 ease-out">
                                 Categories
                                 <span
                                   aria-hidden="true"
@@ -351,7 +356,7 @@ export default function PageHeader() {
                         className="-ml-2 p-2 text-white"
                       >
                         <span className="sr-only">Open menu</span>
-                        <Bars3Icon aria-hidden="true" className="h-6 w-6" />
+                        <Bars3Icon aria-hidden="true" className="h-6 w-6"/>
                       </button>
 
                       {/* Search */}
@@ -385,8 +390,8 @@ export default function PageHeader() {
                       </a>
 
                       <div className="flex items-center lg:ml-8">
-                        <SignInButton />
-                        <ShoppingCart />
+                        <SignInButton/>
+                        <ShoppingCart/>
                       </div>
                     </div>
                   </div>

@@ -3,9 +3,9 @@ import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
-} from "@tanstack/react-query";
-import { Suspense } from "react";
-import LoadingProducts from "./loading";
+}                  from "@tanstack/react-query";
+import { Suspense }       from "react";
+import LoadingProducts    from "./loading";
 import { getAllProducts } from "@/hooks/product/useGetAllProducts";
 
 async function ProductListPage() {
@@ -13,14 +13,14 @@ async function ProductListPage() {
 
   await queryClient.prefetchQuery({
     queryKey: ["products"],
-    queryFn: () => getAllProducts(),
+    queryFn : () => getAllProducts(),
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Suspense fallback={<LoadingProducts />}>
-        <LandingPage />
-      </Suspense>
+      {/*<Suspense fallback={<LoadingProducts />}>*/}
+      <LandingPage/>
+      {/*</Suspense>*/}
     </HydrationBoundary>
   );
 }

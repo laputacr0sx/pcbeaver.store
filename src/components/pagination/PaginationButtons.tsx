@@ -3,11 +3,12 @@ import { cn } from "@/lib/utils";
 import { type ComponentProps, type Dispatch, type SetStateAction } from "react";
 import { Button } from "../ui/button";
 import PageButtonSeparator from "./PageButtonSeparator";
+
 export const CURRENT_PAGE_CLASSNAMES =
-  "relative z-10 inline-flex items-center rounded-none bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
+               "relative z-10 inline-flex items-center rounded-none bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
 
 export const IDLE_PAGE_CLASSNAMES =
-  "relative inline-flex items-center rounded-none border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50";
+               "relative inline-flex items-center rounded-none border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50";
 
 type PageButtonProps = ComponentProps<"button"> & {
   i: number;
@@ -16,7 +17,12 @@ type PageButtonProps = ComponentProps<"button"> & {
   setPage: Dispatch<SetStateAction<number>>;
 };
 
-function PageButton({ i, pageNo, totalPages, setPage }: PageButtonProps) {
+function PageButton({
+                      i,
+                      pageNo,
+                      totalPages,
+                      setPage
+                    }: PageButtonProps) {
   const handlePageChange = (newPage: number) => {
     if (newPage >= 0 && newPage < totalPages) {
       setPage(newPage);
@@ -42,10 +48,10 @@ type PaginationButtonProps = {
 };
 
 function PaginationButtons({
-  pageNo,
-  totalPages,
-  setPage,
-}: PaginationButtonProps) {
+                             pageNo,
+                             totalPages,
+                             setPage,
+                           }: PaginationButtonProps) {
   const startPage = Math.max(0, pageNo - 2);
   const endPage = Math.min(totalPages - 1, pageNo + 2);
   const pages = [];
@@ -58,7 +64,7 @@ function PaginationButtons({
         totalPages={totalPages}
         setPage={setPage}
       />,
-      <PageButtonSeparator key={"start-separator"} />,
+      <PageButtonSeparator key={"start-separator"}/>,
     );
   }
 
@@ -75,7 +81,7 @@ function PaginationButtons({
 
   if (endPage <= totalPages - 3) {
     pages.push(
-      <PageButtonSeparator key={"end-separator"} />,
+      <PageButtonSeparator key={"end-separator"}/>,
       <PageButton
         i={totalPages - 1}
         pageNo={pageNo}

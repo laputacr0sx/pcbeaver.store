@@ -1,8 +1,8 @@
-import { firebaseApp } from "@/lib/authService";
-import { fetchCart } from "@/lib/fetcher";
+import { firebaseApp }                 from "@/lib/authService";
+import { fetchCart }                   from "@/lib/fetcher";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getAuth, type User } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { getAuth, type User }          from "firebase/auth";
+import { useAuthState }                from "react-firebase-hooks/auth";
 
 export const auth = getAuth(firebaseApp);
 
@@ -25,7 +25,7 @@ export function useRemoveCartItem() {
 
   return useMutation({
     mutationFn: (pid: number) => removeCartItem(user, pid),
-    onMutate: () => {
+    onMutate  : () => {
       console.log(`Removing Cart Item`);
     },
 

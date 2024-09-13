@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button }      from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -8,34 +8,36 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+}                      from "@/components/ui/form";
+import { Input }       from "@/components/ui/input";
 import { firebaseApp } from "@/lib/authService";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { getAuth } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { zodResolver }                   from "@hookform/resolvers/zod";
+import { getAuth }                       from "firebase/auth";
+import { useRouter }                     from "next/navigation";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Divider } from "../tailwindui/divider";
-import GoogleSignInButton from "./GoogleSignInButton";
+import { useForm }                       from "react-hook-form";
+import { z }                             from "zod";
+import { Divider }                       from "../tailwindui/divider";
+import GoogleSignInButton                from "./GoogleSignInButton";
 
 export const auth = getAuth(firebaseApp);
 
 const signInFormSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
+  email   : z.string()
+    .email(),
+  password: z.string()
+    .min(8),
 });
 
 function SigninForm() {
   const r = useRouter();
   const [signInWithEmailAndPassword, _, loading] =
-    useSignInWithEmailAndPassword(auth);
+          useSignInWithEmailAndPassword(auth);
 
   const signInForm = useForm<z.infer<typeof signInFormSchema>>({
-    resolver: zodResolver(signInFormSchema),
+    resolver     : zodResolver(signInFormSchema),
     defaultValues: {
-      email: "",
+      email   : "",
       password: "",
     },
   });
@@ -59,7 +61,7 @@ function SigninForm() {
               <FormControl>
                 <Input placeholder="hello@world.com" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage/>
             </FormItem>
           )}
         />
@@ -72,15 +74,15 @@ function SigninForm() {
               <FormControl>
                 <Input type="password" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage/>
             </FormItem>
           )}
         />
         <Button type="submit" disabled={loading}>
           Submit
         </Button>
-        <Divider className="py-4" />
-        <GoogleSignInButton auth={auth} />
+        <Divider className="py-4"/>
+        <GoogleSignInButton auth={auth}/>
       </form>
     </Form>
   );

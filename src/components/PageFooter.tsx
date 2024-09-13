@@ -2,14 +2,32 @@ import Link from "next/link";
 
 const footerNavigation = {
   shop: [
-    { name: "Category", href: "/category/" },
-    { name: "Brand", href: "/category/brand/" },
+    {
+      name: "Category",
+      href: "/category"
+    },
+    {
+      name: "Brand",
+      href: "/brand"
+    },
   ],
-  company: [{ name: "Who am I", href: "#" }],
-  account: [{ name: "Manage Account", href: "#" }],
+  company: [{
+    name: "Who am I",
+    href: "#"
+  }],
+  account: [{
+    name: "Manage Account",
+    href: "#"
+  }],
   connect: [
-    { name: "LinkedIn", href: "https://www.linkedin.com/in/vvfelix" },
-    { name: "Github", href: "https://www.github.com/laputacr0sx" },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/in/vvfelix"
+    },
+    {
+      name: "Github",
+      href: "https://www.github.com/laputacr0sx"
+    },
   ],
 };
 export default function PageFooter() {

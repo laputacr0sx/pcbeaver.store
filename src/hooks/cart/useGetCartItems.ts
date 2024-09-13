@@ -1,8 +1,8 @@
-import { firebaseApp } from "@/lib/authService";
-import { fetchCart } from "@/lib/fetcher";
-import { useQuery } from "@tanstack/react-query";
+import { firebaseApp }        from "@/lib/authService";
+import { fetchCart }          from "@/lib/fetcher";
+import { useQuery }           from "@tanstack/react-query";
 import { getAuth, type User } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuthState }       from "react-firebase-hooks/auth";
 
 const auth = getAuth(firebaseApp);
 
@@ -29,6 +29,6 @@ export default function useGetCartItems() {
 
   return useQuery({
     queryKey: ["cart", user?.uid],
-    queryFn: () => getCartItems(user),
+    queryFn : () => getCartItems(user),
   });
 }

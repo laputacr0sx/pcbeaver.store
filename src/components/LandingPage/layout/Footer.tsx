@@ -1,8 +1,8 @@
 "use client";
 
 import { FOOT_NAV } from "@/lib/navigation";
-import Link from "next/link";
-import React from "react";
+import Link         from "next/link";
+import React        from "react";
 
 function LandingPageFooter() {
   return (

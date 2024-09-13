@@ -1,7 +1,7 @@
-import { fetchProduct } from "@/lib/fetcher";
-import { type Product } from "@/type/Product.type";
+import { fetchProduct }              from "@/lib/fetcher";
+import { type Product }              from "@/type/Product.type";
 import { type PaginatedResponseDTO } from "@/type/product/dto/res/GetAllProductsDTO.type";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery }                  from "@tanstack/react-query";
 
 export type BriefProduct = Omit<Product, "stock"> & { hasStock: boolean };
 
@@ -19,6 +19,6 @@ export async function getAllProducts(page = 0, size = 20) {
 export function useGetAllProducts(page = 0, size = 20) {
   return useQuery({
     queryKey: ["product-list", `hashed-${page}`],
-    queryFn: () => getAllProducts(page, size),
+    queryFn : () => getAllProducts(page, size),
   });
 }

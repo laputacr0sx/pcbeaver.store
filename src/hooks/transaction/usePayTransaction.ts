@@ -1,8 +1,8 @@
-import { auth } from "@/hooks/cart/usePutItemToCart";
+import { auth }             from "@/hooks/cart/usePutItemToCart";
 import { fetchTransaction } from "@/lib/fetcher";
-import { useMutation } from "@tanstack/react-query";
-import type { User } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useMutation }      from "@tanstack/react-query";
+import type { User }        from "firebase/auth";
+import { useAuthState }     from "react-firebase-hooks/auth";
 
 async function payTransaction(user: User | null | undefined, tid: number) {
   const { data } = await fetchTransaction.patch<{ result: string }>(

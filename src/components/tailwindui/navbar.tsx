@@ -1,16 +1,16 @@
 "use client";
 
-import * as Headless from "@headlessui/react";
-import clsx from "clsx";
-import { LayoutGroup, motion } from "framer-motion";
+import * as Headless                from "@headlessui/react";
+import clsx                         from "clsx";
+import { LayoutGroup, motion }      from "framer-motion";
 import React, { forwardRef, useId } from "react";
-import { TouchTarget } from "./button";
-import { Link } from "./link";
+import { TouchTarget }              from "./button";
+import { Link }                     from "./link";
 
 export function Navbar({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"nav">) {
+                         className,
+                         ...props
+                       }: React.ComponentPropsWithoutRef<"nav">) {
   return (
     <nav
       {...props}
@@ -20,9 +20,9 @@ export function Navbar({
 }
 
 export function NavbarDivider({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+                                className,
+                                ...props
+                              }: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div
       aria-hidden="true"
@@ -33,22 +33,22 @@ export function NavbarDivider({
 }
 
 export function NavbarSection({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+                                className,
+                                ...props
+                              }: React.ComponentPropsWithoutRef<"div">) {
   const id = useId();
 
   return (
     <LayoutGroup id={id}>
-      <div {...props} className={clsx(className, "flex items-center gap-3")} />
+      <div {...props} className={clsx(className, "flex items-center gap-3")}/>
     </LayoutGroup>
   );
 }
 
 export function NavbarSpacer({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+                               className,
+                               ...props
+                             }: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div
       aria-hidden="true"
@@ -67,7 +67,7 @@ export const NavbarItem = forwardRef(function NavbarItem(
   }: { current?: boolean; className?: string; children: React.ReactNode } & (
     | Omit<Headless.ButtonProps, "as" | "className">
     | Omit<React.ComponentPropsWithoutRef<typeof Link>, "className">
-  ),
+    ),
   ref: React.ForwardedRef<HTMLAnchorElement | HTMLButtonElement>,
 ) {
   const classes = clsx(
@@ -121,8 +121,8 @@ export const NavbarItem = forwardRef(function NavbarItem(
 });
 
 export function NavbarLabel({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"span">) {
-  return <span {...props} className={clsx(className, "truncate")} />;
+                              className,
+                              ...props
+                            }: React.ComponentPropsWithoutRef<"span">) {
+  return <span {...props} className={clsx(className, "truncate")}/>;
 }

@@ -1,4 +1,4 @@
-import { env } from "@/env";
+import { env }           from "@/env";
 import { initializeApp } from "firebase/app";
 
 import {
@@ -17,13 +17,13 @@ export type UserData = {
 };
 
 const firebaseConfig = {
-  apiKey: env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: "fsse2406-ecommerce-project.firebaseapp.com",
-  projectId: env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: "fsse2406-ecommerce-project.appspot.com",
+  apiKey           : env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain       : "fsse2406-ecommerce-project.firebaseapp.com",
+  projectId        : env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket    : "fsse2406-ecommerce-project.appspot.com",
   messagingSenderId: "745537381443",
-  appId: "1:745537381443:web:830b4947a14e59e51f60f6",
-  measurementId: "G-EXV67P2D9T",
+  appId            : "1:745537381443:web:830b4947a14e59e51f60f6",
+  measurementId    : "G-EXV67P2D9T",
 };
 
 export const firebaseApp = initializeApp(firebaseConfig);
@@ -34,9 +34,9 @@ type UserAuthCredentials = {
 };
 
 export const handleSignUpWithCredentials = async ({
-  email,
-  password,
-}: UserAuthCredentials) => {
+                                                    email,
+                                                    password,
+                                                  }: UserAuthCredentials) => {
   const auth = getAuth();
   const firebaseUserCredentials = await createUserWithEmailAndPassword(
     auth,
@@ -47,9 +47,9 @@ export const handleSignUpWithCredentials = async ({
 };
 
 export const handleSignInWithCredentials = async ({
-  email,
-  password,
-}: UserAuthCredentials) => {
+                                                    email,
+                                                    password,
+                                                  }: UserAuthCredentials) => {
   try {
     const auth = getAuth();
 
@@ -93,7 +93,7 @@ export const handleOnAuthStateChanged = (
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       loginUser = {
-        id: user.uid,
+        id   : user.uid,
         email: user.email ?? "Login User",
       };
     } else {

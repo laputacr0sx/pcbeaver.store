@@ -7,9 +7,9 @@ type ProductDetailLayoutProps = PropsWithChildren & {
 };
 
 async function ProductDetailLayout({
-  children,
-  params: { pid },
-}: ProductDetailLayoutProps) {
+                                     children,
+                                     params: { pid },
+                                   }: ProductDetailLayoutProps) {
   console.log(pid);
 
   return <div>{children}</div>;

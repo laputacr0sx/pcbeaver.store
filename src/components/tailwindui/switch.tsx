@@ -1,8 +1,11 @@
-import * as Headless from '@headlessui/react'
-import clsx from 'clsx'
-import type React from 'react'
+import * as Headless from '@headlessui/react';
+import clsx          from 'clsx';
+import type React    from 'react';
 
-export function SwitchGroup({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function SwitchGroup({
+                              className,
+                              ...props
+                            }: React.ComponentPropsWithoutRef<'div'>) {
   return (
     <div
       data-slot="control"
@@ -15,13 +18,13 @@ export function SwitchGroup({ className, ...props }: React.ComponentPropsWithout
         'has-[[data-slot=description]]:space-y-6 [&_[data-slot=label]]:has-[[data-slot=description]]:font-medium'
       )}
     />
-  )
+  );
 }
 
 export function SwitchField({
-  className,
-  ...props
-}: { className?: string } & Omit<Headless.FieldProps, 'as' | 'className'>) {
+                              className,
+                              ...props
+                            }: { className?: string } & Omit<Headless.FieldProps, 'as' | 'className'>) {
   return (
     <Headless.Field
       data-slot="field"
@@ -40,7 +43,7 @@ export function SwitchField({
         '[&_[data-slot=label]]:has-[[data-slot=description]]:font-medium'
       )}
     />
-  )
+  );
 }
 
 const colors = {
@@ -132,18 +135,18 @@ const colors = {
     '[--switch-bg-ring:theme(colors.rose.600/90%)] [--switch-bg:theme(colors.rose.500)] dark:[--switch-bg-ring:transparent]',
     '[--switch:white] [--switch-ring:theme(colors.rose.600/90%)] [--switch-shadow:theme(colors.rose.900/20%)]',
   ],
-}
+};
 
 type Color = keyof typeof colors
 
 export function Switch({
-  color = 'dark/zinc',
-  className,
-  ...props
-}: {
-  color?: Color
-  className?: string
-} & Omit<Headless.SwitchProps, 'as' | 'className' | 'children'>) {
+                         color = 'dark/zinc',
+                         className,
+                         ...props
+                       }: {
+                            color?: Color
+                            className?: string
+                          } & Omit<Headless.SwitchProps, 'as' | 'className' | 'children'>) {
   return (
     <Headless.Switch
       data-slot="control"
@@ -191,5 +194,5 @@ export function Switch({
         )}
       />
     </Headless.Switch>
-  )
+  );
 }

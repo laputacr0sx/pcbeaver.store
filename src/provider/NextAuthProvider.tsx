@@ -1,4 +1,4 @@
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider }               from "next-auth/react";
 import React, { type PropsWithChildren } from "react";
 
 function NextAuthProvider({ children }: PropsWithChildren) {

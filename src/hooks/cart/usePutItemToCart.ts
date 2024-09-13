@@ -1,9 +1,9 @@
-import { firebaseApp } from "@/lib/authService";
-import { fetchCart } from "@/lib/fetcher";
+import { firebaseApp }                 from "@/lib/authService";
+import { fetchCart }                   from "@/lib/fetcher";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getAuth, type User } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-import toast from "react-hot-toast";
+import { getAuth, type User }          from "firebase/auth";
+import { useAuthState }                from "react-firebase-hooks/auth";
+import toast                           from "react-hot-toast";
 
 export const auth = getAuth(firebaseApp);
 
@@ -31,9 +31,9 @@ export function usePutItemToCart() {
 
   return useMutation({
     mutationFn: ({
-      pid,
-      quantity,
-    }: {
+                   pid,
+                   quantity,
+                 }: {
       pid: number | string;
       quantity: number;
     }) => putItemToCart(user, pid, quantity),

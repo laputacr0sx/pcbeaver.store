@@ -1,9 +1,9 @@
-import { fetchTransaction } from "@/lib/fetcher";
+import { fetchTransaction }           from "@/lib/fetcher";
 import type { PrepareTransactionDTO } from "@/type/transaction/dto/res/PrepareTransactionDTO.type";
-import { useQuery } from "@tanstack/react-query";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { firebaseApp } from "@/lib/authService";
-import { getAuth, type User } from "firebase/auth";
+import { useQuery }                   from "@tanstack/react-query";
+import { useAuthState }               from "react-firebase-hooks/auth";
+import { firebaseApp }                from "@/lib/authService";
+import { getAuth, type User }         from "firebase/auth";
 
 const auth = getAuth(firebaseApp);
 
@@ -17,9 +17,9 @@ async function getTransactionByTid(
       headers: {
         Authorization: `Bearer ${await user?.getIdToken()}`,
       }
-    })
+    });
 
-  return data
+  return data;
 }
 
 
@@ -28,7 +28,7 @@ function useGetTransactionByTid({ tid }: { tid: string }) {
 
   return useQuery({
     queryKey: ["transaction", user?.uid, tid],
-    queryFn: () => getTransactionByTid(user, tid),
+    queryFn : () => getTransactionByTid(user, tid),
   });
 
 }

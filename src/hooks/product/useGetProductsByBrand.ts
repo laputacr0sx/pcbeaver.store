@@ -1,9 +1,9 @@
-import { fetchBrand} from "@/lib/fetcher";
+import { fetchBrand }        from "@/lib/fetcher";
 import {
   type Brand,
   type PaginatedResponseDTO,
-} from "@/type/product/dto/res/GetAllProductsDTO.type";
-import { useQuery } from "@tanstack/react-query";
+}                            from "@/type/product/dto/res/GetAllProductsDTO.type";
+import { useQuery }          from "@tanstack/react-query";
 import { type BriefProduct } from "./useGetAllProducts";
 
 export async function getProductsByBrand(
@@ -27,7 +27,7 @@ export async function getProductsByBrand(
 function useGetProductsByBrand(brand: Brand, page = 0, size = 20) {
   return useQuery({
     queryKey: ["product", brand, page],
-    queryFn: () => getProductsByBrand(brand, page, size),
+    queryFn : () => getProductsByBrand(brand, page, size),
   });
 }
 
