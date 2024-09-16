@@ -1,5 +1,6 @@
 "use client";
 
+import { BookOpenIcon }              from "@heroicons/react/24/outline";
 import ShoppingCart                  from "@/components/LandingPage/Cart";
 import SignInButton                  from "@/components/LandingPage/SignInButton";
 import { fetchBrand, fetchCategory } from "@/lib/fetcher";
@@ -30,6 +31,9 @@ import { useQueries }                from "@tanstack/react-query";
 import Image                         from "next/image";
 import Link                          from "next/link";
 import { Fragment, useState }        from "react";
+import { useGetTransactionsByBuyer } from "@/hooks/transaction/useGetTransactionsByBuyer";
+import { Skeleton }                  from "@/components/ui/skeleton";
+import { ShoppingBagIcon }           from "lucide-react";
 
 export default function PageHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -52,6 +56,7 @@ export default function PageHeader() {
       },
     ],
   });
+
 
   return (
     <>
@@ -391,6 +396,7 @@ export default function PageHeader() {
 
                       <div className="flex gap-8 items-center lg:ml-8">
                         <SignInButton/>
+                        <OrderHistory/>
                         <ShoppingCart/>
                       </div>
                     </div>
@@ -403,4 +409,31 @@ export default function PageHeader() {
       </div>
     </>
   );
+}
+
+
+function OrderHistory() {
+  const {
+          data     : transactionHistory,
+          isSuccess: successLoadTransactionHistory
+        } = useGetTransactionsByBuyer();
+
+  if (!successLoadTransactionHistory) return <Skeleton className="rounded-full h-8 w-8"/>;
+
+  console.log(transactionHistory);
+
+
+  return <div className="ml-4 flow-root lg:ml-6">
+    <Link href="/history" className="group -m-2 flex items-center p-2">
+      <BookOpenIcon
+        aria-hidden="true"
+        className="h-6 w-6 flex-shrink-0 text-lime-400 group-hover:text-lime-500"
+      />
+      <span className="ml-2 text-sm font-medium text-lime-700 group-hover:text-lime-800">
+          {transactionHistory.length}
+        </span>
+      <span className="sr-only">items in cart, view bag</span>
+    </Link>
+  </div>;
+
 }

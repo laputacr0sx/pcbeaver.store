@@ -14,6 +14,9 @@ async function getTransactionsByBuyer(user: User | null | undefined) {
     }
   });
 
+  console.log("LOGGED from Hook")
+  console.table(data)
+
   return data;
 
 }
@@ -23,6 +26,7 @@ export function useGetTransactionsByBuyer() {
 
   return useQuery({
     queryKey: ["transactions", user],
-    queryFn: () => getTransactionsByBuyer(user)
+    queryFn: () => getTransactionsByBuyer(user),
+    enabled: !!user
   });
 }

@@ -32,9 +32,9 @@ function ShoppingCart() {
       <>
         <ShoppingBagIcon
           aria-hidden="true"
-          className="h-6 w-6 flex-shrink-0 text-red-400 group-hover:text-red-500"
+          className="h-6 w-6 flex-shrink-0 text-zinc-400 group-hover:text-zinc-500"
         />
-        <span className="ml-2 text-sm font-medium text-red-700 group-hover:text-red-800">
+        <span className="ml-2 text-sm font-medium text-zinc-700 group-hover:text-zinc-800">
           0
         </span>
         <span className="sr-only">items in cart, view bag</span>
