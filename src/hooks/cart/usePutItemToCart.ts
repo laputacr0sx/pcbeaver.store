@@ -45,6 +45,7 @@ export function usePutItemToCart() {
       console.table(data);
 
       await queryClient.invalidateQueries({ queryKey: ["cart"] });
+      
       toast.success(`Added ${variables.quantity} to your cart!`);
     },
   });
