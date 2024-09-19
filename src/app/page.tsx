@@ -63,7 +63,7 @@ export default function HomePage() {
             difference.
           </p>
           <Link
-            href="/"
+            href="/products"
             className="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100"
           >
             Show Me

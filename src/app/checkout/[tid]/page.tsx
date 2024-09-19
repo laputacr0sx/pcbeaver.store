@@ -27,6 +27,7 @@ import { z }                         from "zod";
 import { PrepareTransactionDTO }     from "@/type/transaction/dto/res/PrepareTransactionDTO.type";
 import { Divider }                   from "@/components/tailwindui/divider";
 import toast                         from "react-hot-toast";
+import useFinishTransaction          from "@/hooks/transaction/useFinishTransaction";
 
 export default function CheckoutPage() {
   const { tid } = useParams<{ tid: string }>();
@@ -244,41 +245,29 @@ type PaymentForm = z.infer<typeof paymentFormSchema>;
 
 function PaymentFormComponent({ transaction }: { transaction: PrepareTransactionDTO }) {
   const paymentForm = useForm<PaymentForm>({
-    resolver: zodResolver(paymentFormSchema),
+    resolver     : zodResolver(paymentFormSchema),
     defaultValues: {
-      emailAddress: "",
-      nameOnCard: "",
-      cardNumber: "",
+      emailAddress  : "",
+      nameOnCard    : "",
+      cardNumber    : "",
       expirationDate: "",
-      cvc: "",
-      address: "",
-      city: "",
-      region: "",
-      postalCode: "",
+      cvc           : "",
+      address       : "",
+      city          : "",
+      region        : "",
+      postalCode    : "",
     }
   });
   const { mutate: payTransaction } = usePayTransaction();
 
+
   async function onSubmit(values: PaymentForm) {
-    console.table(values);
     payTransaction({ tid: transaction.tid });
   }
 
   function invalidSubmit(err: FieldErrors<PaymentForm>) {
     console.error(err);
     console.error("Invalid form submission");
-  }
-
-  function demoFillIn() {
-    paymentForm.setValue("cvc", "1111");
-    paymentForm.setValue("emailAddress", "test@test.com");
-    paymentForm.setValue("nameOnCard", "Test User");
-    paymentForm.setValue("cardNumber", "4242424242424242");
-    paymentForm.setValue("expirationDate", "12/34");
-    paymentForm.setValue("address", "123 Main St");
-    paymentForm.setValue("city", "Any Town");
-    paymentForm.setValue("region", "CA");
-    paymentForm.setValue("postalCode", "12345");
   }
 
   return (
@@ -523,7 +512,7 @@ function PaymentFormComponent({ transaction }: { transaction: PrepareTransaction
                     paymentForm.setValue("region", "CA");
                     paymentForm.setValue("postalCode", "12345");
 
-                    toast.success("Demo payment filled in successfully!");
+                    toast.success("Demo payment filled in successfully!", { position: "bottom-center" });
                   }
                 }
                 className="mt-6 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -536,7 +525,7 @@ function PaymentFormComponent({ transaction }: { transaction: PrepareTransaction
                 onClick={() => {
                   paymentForm.reset();
 
-                  toast.success("Form Reset")
+                  toast.success("Form Reset");
                 }}>
                 Reset
               </Button>

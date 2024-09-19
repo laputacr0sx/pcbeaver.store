@@ -1,6 +1,7 @@
 # [The Computer Assembler]("http://localhost:3000")
 
 ## Tech Stack
+
 - NextJS
 - React
 - TailwindCSS
@@ -8,9 +9,11 @@
 - FireBase
 
 ## Routing
+
 - `/` Home Page
-- `/products`  Product Page
+- `/products` Product Page
 - `/products/[pid]` Item Page
 - `/cart` User Cart Page
+- `/checkout` Checkout Page
 
 ##

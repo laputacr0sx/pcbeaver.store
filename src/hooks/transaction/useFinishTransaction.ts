@@ -3,11 +3,11 @@ import { fetchTransaction }            from "@/lib/fetcher";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { User }                   from "firebase/auth";
 import { useAuthState }                from "react-firebase-hooks/auth";
-import useFinishTransaction            from "@/hooks/transaction/useFinishTransaction";
+import { useRouter }                   from "next/navigation";
 
-async function payTransaction(user: User | null | undefined, tid: number) {
+async function finishTranscation(user: User | null | undefined, tid: number) {
   const { data } = await fetchTransaction.patch<{ result: string }>(
-    `/${tid}/pay`,
+    `/${tid}/finish`,
     null,
     {
       headers: {
@@ -18,16 +18,17 @@ async function payTransaction(user: User | null | undefined, tid: number) {
   return data;
 }
 
-function usePayTransaction() {
+function useFinishTranscation() {
   const queryClient = useQueryClient();
   const [user] = useAuthState(auth);
-  const { mutate: finishTransaction } = useFinishTransaction();
+  const r = useRouter();
 
   return useMutation({
-    mutationFn: ({ tid }: { tid: number }) => payTransaction(user, tid),
-    async onSuccess(_, { tid }) {
+    mutationFn: ({ tid }: { tid: number }) => finishTranscation(user, tid),
+    async onSuccess() {
       await queryClient.invalidateQueries({ queryKey: ["cart", 'transaction'] });
-      finishTransaction({ tid });
+
+      r.push(`/history`);
     },
     onError(error) {
       console.error(error);
@@ -35,4 +36,4 @@ function usePayTransaction() {
   });
 }
 
-export default usePayTransaction;
+export default useFinishTranscation;

@@ -363,14 +363,6 @@ export default function PageHeader() {
                         <Bars3Icon aria-hidden="true" className="h-6 w-6"/>
                       </button>
 
-                      {/* Search */}
-                      <Link href="#" className="ml-2 p-2 text-white">
-                        <span className="sr-only">Search</span>
-                        <MagnifyingGlassIcon
-                          aria-hidden="true"
-                          className="h-6 w-6"
-                        />
-                      </Link>
                     </div>
 
                     {/* Logo (lg-) */}
@@ -386,12 +378,6 @@ export default function PageHeader() {
                     </Link>
 
                     <div className="flex flex-1 items-center justify-end">
-                      <a
-                        href="#"
-                        className="hidden text-sm font-medium text-white lg:block"
-                      >
-                        Search
-                      </a>
 
                       <div className="flex gap-8 items-center lg:ml-8">
                         <SignInButton/>

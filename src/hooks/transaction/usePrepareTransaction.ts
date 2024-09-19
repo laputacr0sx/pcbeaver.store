@@ -32,7 +32,7 @@ export function usePrepareTransaction() {
 
     async onSuccess(data) {
       console.table(data);
-      r.push("/");
+      r.push(`/checkout/${data.tid}`);
     },
   });
 }
