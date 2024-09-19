@@ -25,7 +25,7 @@ export function useGetTransactionsByBuyer() {
   const [user] = useAuthState(auth);
 
   return useQuery({
-    queryKey: ["transactions", user],
+    queryKey: ["transaction", user],
     queryFn: () => getTransactionsByBuyer(user),
     enabled: !!user
   });

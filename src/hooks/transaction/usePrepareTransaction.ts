@@ -5,6 +5,7 @@ import { useMutation }                from "@tanstack/react-query";
 import { useAuthState }               from "react-firebase-hooks/auth";
 import toast                          from "react-hot-toast";
 import { auth }                       from "@/hooks/cart/usePutItemToCart";
+import { useRouter }                  from "next/navigation";
 
 async function createTransaction(user: User | null | undefined,) {
   const { data } = await fetchTransaction.post<PrepareTransactionDTO>(
@@ -21,6 +22,7 @@ async function createTransaction(user: User | null | undefined,) {
 
 export function usePrepareTransaction() {
   const [user] = useAuthState(auth);
+  const r = useRouter();
 
   return useMutation({
     mutationFn: () => createTransaction(user),
@@ -30,7 +32,7 @@ export function usePrepareTransaction() {
 
     async onSuccess(data) {
       console.table(data);
-
+      r.push("/");
     },
   });
 }

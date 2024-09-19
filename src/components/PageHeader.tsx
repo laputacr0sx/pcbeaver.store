@@ -33,7 +33,6 @@ import Link                          from "next/link";
 import { Fragment, useState }        from "react";
 import { useGetTransactionsByBuyer } from "@/hooks/transaction/useGetTransactionsByBuyer";
 import { Skeleton }                  from "@/components/ui/skeleton";
-import { ShoppingBagIcon }           from "lucide-react";
 
 export default function PageHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -204,7 +203,7 @@ export default function PageHeader() {
         <header className="relative z-10">
           <nav aria-label="Top">
             {/* Secondary navigation */}
-            <div className="bg-white bg-opacity-10 backdrop-blur-sm backdrop-filter">
+            <div className="bg-zinc-900 ">
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div>
                   <div className="flex h-16 items-center justify-between">
